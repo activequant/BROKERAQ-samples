@@ -1,0 +1,1 @@
+1) PreconditionsWindows users: We suggest you use Python(x,y) to run these samples. Please download it from http://code.google.com/p/pythonxy/wiki/Downloads?tm=2  but of course any other python distro will do, too. 
