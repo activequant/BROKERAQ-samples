@@ -12,56 +12,12 @@
 #   Utils for encoding the bit representations of numbers
 #
 #   - Varint: Base 128 variable length integers (using only lower 7 bits of the byte)
-#   - ZigZag: Transforming negative numbers into positives (0=0, 1=2, 2=4, -1=1, -2=3, ...)
 #   - numberToBytes: Minimal byte representation of a number, without leading empty bytes 
 #
 #   Big-Endian ordering is used everywhere (for all bits in bytes, and for all 
 #   bytes in a byte-group (most significant comes first). 
 #
 #
-
-def numberToZigZag(n):
-    """
-    ZigZag-Encodes a number:
-       -1 = 1
-       -2 = 3
-        0 = 0
-        1 = 2
-        2 = 4
-    """
-    return (n << 1) ^ (n >> 31)
-
-def zigZagToNumber(z):
-    """ Reverses ZigZag encoding """
-    return (z >> 1) if not z & 1 else -(z+1 >> 1)
-    
-def numberToBytes(n):
-    """
-    Returns the bytes representing the number, without most significant bytes if  
-    empty. Starts at the rightmost (least significant) byte and traverse to the left. 
-    """
-    if n == 0:
-        return bytearray([0x00])
-        
-    result = bytearray()
-    while n > 0:
-        result.insert(0, n & 255)
-        n >>= 8        
-    return result
-
-def bytesToNumber(b):
-    """
-    Restoring the stripped bytes of an int or long into Python's built-in data types
-    int or long.
-    """   
-    result = 0
-    round = 0
-    for byte in b:
-        round += 1
-        if round > 1:
-            result <<= 8
-        result |= byte
-    return result
     
 def numberToVarint(n):
     """ 
@@ -107,14 +63,6 @@ def varintToNumber(byteArray):
         number |= byte & 127 # only use the lower 7 bits
     return number        
 
-def unicodeToByteArray(u):
-    """ Simple conversion of unicode to bytearray: utf8 encoding """ 
-    return bytearray(u.encode("utf-8"))
-    
-def byteArrayToUnicode(byteArray):
-    """ Simple conversion of bytearray to unicode: utf8 decoding and casting """ 
-    return unicode(byteArray.decode("utf-8"))
-        
 def printBits(byteArray):
     """
     Print all bits of a bytearray

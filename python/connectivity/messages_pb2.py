@@ -3,15 +3,23 @@
 from google.protobuf import descriptor
 from google.protobuf import message
 from google.protobuf import reflection
-from google.protobuf import service
-from google.protobuf import service_reflection
 from google.protobuf import descriptor_pb2
+# @@protoc_insertion_point(imports)
+
+
+
+DESCRIPTOR = descriptor.FileDescriptor(
+  name='messages.proto',
+  package='com.activequant.messages',
+  serialized_pb='\n\x0emessages.proto\x12\x18\x63om.activequant.messages\"\xc3\x05\n\x0b\x42\x61seMessage\x12?\n\x04type\x18\x01 \x02(\x0e\x32\x31.com.activequant.messages.BaseMessage.CommandType\"\xe8\x04\n\x0b\x43ommandType\x12\x0b\n\x07VERSION\x10\x01\x12\t\n\x05LOGIN\x10\x02\x12\x0f\n\x0bSERVER_TIME\x10\x03\x12\x12\n\x0eLOGIN_RESPONSE\x10\x04\x12\x07\n\x03MDS\x10\x05\x12\r\n\tACCT_DATA\x10\x06\x12\x13\n\x0fPOSITION_REPORT\x10\x07\x12\x14\n\x10\x45XECUTION_REPORT\x10\x08\x12\x10\n\x0cORD_CNCL_REQ\x10\t\x12\x10\n\x0cORD_CNCL_REJ\x10\n\x12\x15\n\x11ORD_CNCL_REPL_REQ\x10\x0b\x12\r\n\tNEW_ORDER\x10\x0c\x12\x11\n\rORD_SUBMITTED\x10\r\x12\x0e\n\nORD_ACCPTD\x10\x0e\x12\x11\n\rORD_CANCELLED\x10\x0f\x12\x0f\n\x0bORD_UPDATED\x10\x10\x12\x13\n\x0fSECURITY_STATUS\x10\x11\x12\x0b\n\x07ORD_REJ\x10\x12\x12\x18\n\x14ORD_UPDATE_SUBMITTED\x10\x13\x12\x18\n\x14ORD_CANCEL_SUBMITTED\x10\x14\x12\x14\n\x10ORD_UPD_REJECTED\x10\x15\x12\x15\n\x11\x45XECUTION_REPORT2\x10\x16\x12\x0c\n\x08\x43UST_CMD\x10\x17\x12\x0e\n\nINFO_EVENT\x10\x18\x12\x08\n\x04OHLC\x10\x19\x12\x08\n\x04TICK\x10\x1a\x12\x0c\n\x08VALUESET\x10\x1b\x12\x10\n\x0cMD_SUBSCRIBE\x10\x1c\x12\x19\n\x15MD_SUBSCRIBE_RESPONSE\x10\x1d\x12\x12\n\x0eMD_UNSUBSCRIBE\x10\x1e\x12\x1b\n\x17MD_UNSUBSCRIBE_RESPONSE\x10\x1f\x12\x10\n\x0cHIST_REQUEST\x10 \x12\x15\n\x11HIST_OHLCRESPONSE\x10 *\x08\x08\x64\x10\x80\x80\x80\x80\x02\"\x93\x01\n\x05Login\x12\x0e\n\x06userId\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\x12\x13\n\x0bsessionType\x18\x03 \x02(\t2S\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x64 \x02(\x0b\x32\x1f.com.activequant.messages.Login\"y\n\nServerTime\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x32X\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x65 \x02(\x0b\x32$.com.activequant.messages.ServerTime\"|\n\rLoginResponse\x12\x0e\n\x06status\x18\x01 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x66 \x02(\x0b\x32\'.com.activequant.messages.LoginResponse\"\xe2\x01\n\x12MarketDataSnapshot\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\r\n\x05\x62idPx\x18\x02 \x03(\x01\x12\r\n\x05\x61skPx\x18\x03 \x03(\x01\x12\x0c\n\x04\x62idQ\x18\x04 \x03(\x01\x12\x0c\n\x04\x61skQ\x18\x05 \x03(\x01\x12\r\n\x05mdiId\x18\x06 \x02(\t\x12\x0e\n\x06resend\x18\x07 \x01(\x08\x32`\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18g \x02(\x0b\x32,.com.activequant.messages.MarketDataSnapshot\"\x93\x01\n\x12\x41\x63\x63ountDataMessage\x12\x0c\n\x04type\x18\x01 \x02(\t\x12\r\n\x05value\x18\x02 \x02(\t2`\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18h \x02(\x0b\x32,.com.activequant.messages.AccountDataMessage\"\xba\x01\n\x0ePositionReport\x12\x10\n\x08openDate\x18\x01 \x02(\t\x12\x12\n\nentryPrice\x18\x02 \x02(\x01\x12\x10\n\x08quantity\x18\x03 \x02(\x01\x12\x12\n\ntradInstId\x18\x04 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18i \x02(\x0b\x32(.com.activequant.messages.PositionReport\"\xad\x03\n\x0f\x45xecutionReport\x12\x0f\n\x07\x63lOrdId\x18\x01 \x02(\t\x12\x0e\n\x06\x65xecId\x18\x02 \x02(\t\x12\x0c\n\x04side\x18\x03 \x02(\x05\x12\x10\n\x08\x63urrency\x18\x04 \x02(\t\x12\x10\n\x08orderQty\x18\x05 \x02(\x01\x12\r\n\x05price\x18\x06 \x02(\x01\x12\x12\n\ntradInstId\x18\x07 \x02(\t\x12\x14\n\x0ctransactTime\x18\x08 \x02(\t\x12\x0f\n\x07orderId\x18\t \x02(\t\x12\x10\n\x08\x65xecType\x18\n \x02(\x05\x12\x11\n\tordStatus\x18\x0b \x02(\x05\x12\x0e\n\x06\x63umQty\x18\x0c \x02(\x01\x12\x11\n\tleavesQty\x18\r \x02(\x01\x12\r\n\x05\x61vgPx\x18\x0e \x02(\x01\x12\x0f\n\x07ordType\x18\x10 \x02(\t\x12\x0c\n\x04text\x18\x11 \x01(\t\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t\x12\x17\n\x0fmassStatusReqId\x18\x14 \x01(\t2]\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18j \x02(\x0b\x32).com.activequant.messages.ExecutionReport\"\xe1\x01\n\x12OrderCancelRequest\x12\x13\n\x0borgCldOrdId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\ntradInstId\x18\x03 \x02(\t\x12\x0c\n\x04side\x18\x04 \x02(\x05\x12\x10\n\x08orderQty\x18\x06 \x02(\x01\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t2`\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18k \x02(\x0b\x32,.com.activequant.messages.OrderCancelRequest\"\x8f\x02\n\x11OrderCancelReject\x12\x12\n\ntradInstId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\norgClOrdId\x18\x03 \x02(\t\x12\x11\n\tordStatus\x18\x04 \x02(\t\x12\x18\n\x10\x43xlRejResponseTo\x18\x05 \x02(\t\x12\x14\n\x0c\x63lxRejReason\x18\x06 \x01(\t\x12\x0c\n\x04text\x18\x07 \x01(\t\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t2_\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18l \x02(\x0b\x32+.com.activequant.messages.OrderCancelReject\"\xb9\x02\n\x19OrderCancelReplaceRequest\x12\x12\n\ntradInstId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\norgClOrdId\x18\x03 \x02(\t\x12\x0c\n\x04side\x18\x04 \x02(\x05\x12\x14\n\x0ctransactTime\x18\x05 \x02(\t\x12\x10\n\x08orderQty\x18\x06 \x02(\x01\x12\x0f\n\x07ordType\x18\x07 \x02(\x05\x12\r\n\x05price\x18\x08 \x02(\x01\x12\x13\n\x0btimeInForce\x18\t \x02(\x05\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t2g\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18m \x02(\x0b\x32\x33.com.activequant.messages.OrderCancelReplaceRequest\"\xa7\x02\n\x08NewOrder\x12\x12\n\ntradInstId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\norgClOrdId\x18\x03 \x01(\t\x12\x0c\n\x04side\x18\x04 \x02(\x05\x12\x14\n\x0ctransactTime\x18\x05 \x01(\t\x12\x10\n\x08orderQty\x18\x06 \x02(\x01\x12\x0f\n\x07ordType\x18\x07 \x02(\x05\x12\r\n\x05price\x18\x08 \x01(\x01\x12\x13\n\x0btimeInForce\x18\t \x01(\x05\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t\x12\x0e\n\x06resend\x18\x14 \x02(\x05\x32V\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18n \x02(\x0b\x32\".com.activequant.messages.NewOrder\"\x7f\n\x0eOrderSubmitted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18o \x02(\x0b\x32(.com.activequant.messages.OrderSubmitted\"}\n\rOrderAccepted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18p \x02(\x0b\x32\'.com.activequant.messages.OrderAccepted\"\x7f\n\x0eOrderCancelled\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18q \x02(\x0b\x32(.com.activequant.messages.OrderCancelled\"{\n\x0cOrderUpdated\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2Z\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18r \x02(\x0b\x32&.com.activequant.messages.OrderUpdated\"\x8d\x01\n\x0eSecurityStatus\x12\r\n\x05tdiId\x18\x02 \x02(\t\x12\x0e\n\x06status\x18\x03 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18s \x02(\x0b\x32(.com.activequant.messages.SecurityStatus\"\x8d\x01\n\rOrderRejected\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x0e\n\x06reason\x18\x03 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18t \x02(\x0b\x32\'.com.activequant.messages.OrderRejected\"\x8b\x01\n\x14OrderUpdateSubmitted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2b\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18u \x02(\x0b\x32..com.activequant.messages.OrderUpdateSubmitted\"\x8b\x01\n\x14OrderCancelSubmitted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2b\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18v \x02(\x0b\x32..com.activequant.messages.OrderCancelSubmitted\"\x99\x01\n\x13OrderUpdateRejected\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x0e\n\x06reason\x18\x03 \x02(\t2a\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18w \x02(\x0b\x32-.com.activequant.messages.OrderUpdateRejected\"\x88\x02\n\x10\x45xecutionReport2\x12\x0f\n\x07\x63lOrdId\x18\x01 \x02(\t\x12\x0e\n\x06\x65xecId\x18\x02 \x02(\t\x12\x0c\n\x04side\x18\x03 \x02(\t\x12\r\n\x05price\x18\x06 \x02(\x01\x12\r\n\x05tdiId\x18\x07 \x02(\t\x12\x14\n\x0ctransactTime\x18\x08 \x02(\x03\x12\x0b\n\x03qty\x18\r \x02(\x01\x12\x0e\n\x06resend\x18\x0e \x02(\x05\x12\x14\n\x0cquantityLeft\x18\x0f \x02(\x01\x32^\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18x \x02(\x0b\x32*.com.activequant.messages.ExecutionReport2\"}\n\rCustomCommand\x12\x0f\n\x07\x63ommand\x18\x01 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18y \x02(\x0b\x32\'.com.activequant.messages.CustomCommand\"\x88\x01\n\tInfoEvent\x12\x0f\n\x07message\x18\x01 \x02(\t\x12\x11\n\ttimestamp\x18\x02 \x02(\x03\x32W\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18z \x02(\x0b\x32#.com.activequant.messages.InfoEvent\"\xc4\x01\n\x04OHLC\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x0c\n\x04open\x18\x03 \x02(\x01\x12\x0c\n\x04high\x18\x04 \x02(\x01\x12\x0b\n\x03low\x18\x05 \x02(\x01\x12\r\n\x05\x63lose\x18\x06 \x02(\x01\x12\x0e\n\x06volume\x18\x07 \x01(\x01\x32R\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18{ \x02(\x0b\x32\x1e.com.activequant.messages.OHLC\"\xb4\x01\n\x04Tick\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\r\n\x05price\x18\x03 \x02(\x01\x12\x10\n\x08quantity\x18\x04 \x02(\x01\x12\x15\n\rtickDirection\x18\x05 \x02(\x05\x32R\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18| \x02(\x0b\x32\x1e.com.activequant.messages.Tick\"\xad\x01\n\x08ValueSet\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\x0c\n\x04type\x18\x02 \x02(\t\x12\n\n\x02id\x18\x03 \x02(\t\x12\r\n\x05\x66ield\x18\x04 \x02(\t\x12\r\n\x05value\x18\x05 \x02(\t2V\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18} \x02(\x0b\x32\".com.activequant.messages.ValueSet\"\x8a\x01\n\x0bMDSubscribe\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x11\n\ttimeframe\x18\x03 \x02(\t2Y\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18~ \x02(\x0b\x32%.com.activequant.messages.MDSubscribe\"\x8e\x01\n\rMDUnsubscribe\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x11\n\ttimeframe\x18\x03 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x7f \x02(\x0b\x32\'.com.activequant.messages.MDUnsubscribe\"\x97\x01\n\x13MDSubscribeResponse\x12\x0e\n\x06status\x18\x02 \x02(\t\x12\x0c\n\x04\x66lag\x18\x03 \x02(\x05\x32\x62\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x80\x01 \x02(\x0b\x32-.com.activequant.messages.MDSubscribeResponse\"\x99\x01\n\x15MDUnsubscribeResponse\x12\x0e\n\x06status\x18\x02 \x02(\t\x12\x0c\n\x04\x66lag\x18\x03 \x02(\x05\x32\x62\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x81\x01 \x02(\x0b\x32-.com.activequant.messages.MDSubscribeResponse\"\xb1\x01\n\x0bHistRequest\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x12\n\nstartDate8\x18\x03 \x02(\x05\x12\x10\n\x08\x65ndDate8\x18\x04 \x02(\x05\x12\x11\n\ttimeframe\x18\x05 \x02(\t2Z\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x82\x01 \x02(\x0b\x32%.com.activequant.messages.HistRequest\"\x95\x02\n\x10HistOhlcResponse\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x11\n\ttimestamp\x18\x03 \x03(\x03\x12\x0c\n\x04open\x18\x04 \x03(\x01\x12\x0c\n\x04high\x18\x05 \x03(\x01\x12\x0b\n\x03low\x18\x06 \x03(\x01\x12\r\n\x05\x63lose\x18\x07 \x03(\x01\x12\x0e\n\x06volume\x18\x08 \x03(\x01\x12\r\n\x05\x66inal\x18\t \x02(\x05\x12\x11\n\terrorCode\x18\n \x01(\x05\x12\x14\n\x0c\x65rrorMessage\x18\x0b \x01(\t2_\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x83\x01 \x02(\x0b\x32*.com.activequant.messages.HistOhlcResponseB&\n\x18\x63om.activequant.messagesB\nAQMessages')
+
 
 
 _BASEMESSAGE_COMMANDTYPE = descriptor.EnumDescriptor(
   name='CommandType',
   full_name='com.activequant.messages.BaseMessage.CommandType',
-  filename='CommandType',
+  filename=None,
+  file=DESCRIPTOR,
   values=[
     descriptor.EnumValueDescriptor(
       name='VERSION', index=0, number=1,
@@ -121,58 +129,92 @@ _BASEMESSAGE_COMMANDTYPE = descriptor.EnumDescriptor(
       name='VALUESET', index=26, number=27,
       options=None,
       type=None),
+    descriptor.EnumValueDescriptor(
+      name='MD_SUBSCRIBE', index=27, number=28,
+      options=None,
+      type=None),
+    descriptor.EnumValueDescriptor(
+      name='MD_SUBSCRIBE_RESPONSE', index=28, number=29,
+      options=None,
+      type=None),
+    descriptor.EnumValueDescriptor(
+      name='MD_UNSUBSCRIBE', index=29, number=30,
+      options=None,
+      type=None),
+    descriptor.EnumValueDescriptor(
+      name='MD_UNSUBSCRIBE_RESPONSE', index=30, number=31,
+      options=None,
+      type=None),
+    descriptor.EnumValueDescriptor(
+      name='HIST_REQUEST', index=31, number=32,
+      options=None,
+      type=None),
+    descriptor.EnumValueDescriptor(
+      name='HIST_OHLCRESPONSE', index=32, number=32,
+      options=None,
+      type=None),
   ],
+  containing_type=None,
   options=None,
+  serialized_start=126,
+  serialized_end=742,
 )
 
 
 _BASEMESSAGE = descriptor.Descriptor(
   name='BaseMessage',
   full_name='com.activequant.messages.BaseMessage',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='type', full_name='com.activequant.messages.BaseMessage.type', index=0,
       number=1, type=14, cpp_type=8, label=2,
-      default_value=1,
+      has_default_value=False, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
   ],
   extensions=[
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
     _BASEMESSAGE_COMMANDTYPE,
   ],
-  options=None)
+  options=None,
+  is_extendable=True,
+  extension_ranges=[(100, 536870912), ],
+  serialized_start=45,
+  serialized_end=752,
+)
 
 
 _LOGIN = descriptor.Descriptor(
   name='Login',
   full_name='com.activequant.messages.Login',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='userId', full_name='com.activequant.messages.Login.userId', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='password', full_name='com.activequant.messages.Login.password', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='sessionType', full_name='com.activequant.messages.Login.sessionType', index=2,
       number=3, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -181,27 +223,33 @@ _LOGIN = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.Login.cmd', index=0,
       number=100, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=755,
+  serialized_end=902,
+)
 
 
 _SERVERTIME = descriptor.Descriptor(
   name='ServerTime',
   full_name='com.activequant.messages.ServerTime',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='timestamp', full_name='com.activequant.messages.ServerTime.timestamp', index=0,
       number=1, type=3, cpp_type=2, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -210,27 +258,33 @@ _SERVERTIME = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.ServerTime.cmd', index=0,
       number=101, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=904,
+  serialized_end=1025,
+)
 
 
 _LOGINRESPONSE = descriptor.Descriptor(
   name='LoginResponse',
   full_name='com.activequant.messages.LoginResponse',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='status', full_name='com.activequant.messages.LoginResponse.status', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -239,69 +293,75 @@ _LOGINRESPONSE = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.LoginResponse.cmd', index=0,
       number=102, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1027,
+  serialized_end=1151,
+)
 
 
 _MARKETDATASNAPSHOT = descriptor.Descriptor(
   name='MarketDataSnapshot',
   full_name='com.activequant.messages.MarketDataSnapshot',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='timestamp', full_name='com.activequant.messages.MarketDataSnapshot.timestamp', index=0,
       number=1, type=3, cpp_type=2, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='bidPx', full_name='com.activequant.messages.MarketDataSnapshot.bidPx', index=1,
       number=2, type=1, cpp_type=5, label=3,
-      default_value=[],
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='askPx', full_name='com.activequant.messages.MarketDataSnapshot.askPx', index=2,
       number=3, type=1, cpp_type=5, label=3,
-      default_value=[],
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='bidQ', full_name='com.activequant.messages.MarketDataSnapshot.bidQ', index=3,
       number=4, type=1, cpp_type=5, label=3,
-      default_value=[],
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='askQ', full_name='com.activequant.messages.MarketDataSnapshot.askQ', index=4,
       number=5, type=1, cpp_type=5, label=3,
-      default_value=[],
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='mdiId', full_name='com.activequant.messages.MarketDataSnapshot.mdiId', index=5,
       number=6, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='resend', full_name='com.activequant.messages.MarketDataSnapshot.resend', index=6,
       number=7, type=8, cpp_type=7, label=1,
-      default_value=False,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -310,34 +370,40 @@ _MARKETDATASNAPSHOT = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.MarketDataSnapshot.cmd', index=0,
       number=103, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1154,
+  serialized_end=1380,
+)
 
 
 _ACCOUNTDATAMESSAGE = descriptor.Descriptor(
   name='AccountDataMessage',
   full_name='com.activequant.messages.AccountDataMessage',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='type', full_name='com.activequant.messages.AccountDataMessage.type', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='value', full_name='com.activequant.messages.AccountDataMessage.value', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -346,48 +412,54 @@ _ACCOUNTDATAMESSAGE = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.AccountDataMessage.cmd', index=0,
       number=104, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1383,
+  serialized_end=1530,
+)
 
 
 _POSITIONREPORT = descriptor.Descriptor(
   name='PositionReport',
   full_name='com.activequant.messages.PositionReport',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='openDate', full_name='com.activequant.messages.PositionReport.openDate', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='entryPrice', full_name='com.activequant.messages.PositionReport.entryPrice', index=1,
       number=2, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='quantity', full_name='com.activequant.messages.PositionReport.quantity', index=2,
       number=3, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='tradInstId', full_name='com.activequant.messages.PositionReport.tradInstId', index=3,
       number=4, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -396,139 +468,152 @@ _POSITIONREPORT = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.PositionReport.cmd', index=0,
       number=105, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1533,
+  serialized_end=1719,
+)
 
 
 _EXECUTIONREPORT = descriptor.Descriptor(
   name='ExecutionReport',
   full_name='com.activequant.messages.ExecutionReport',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.ExecutionReport.clOrdId', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='execId', full_name='com.activequant.messages.ExecutionReport.execId', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='side', full_name='com.activequant.messages.ExecutionReport.side', index=2,
       number=3, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='currency', full_name='com.activequant.messages.ExecutionReport.currency', index=3,
       number=4, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='orderQty', full_name='com.activequant.messages.ExecutionReport.orderQty', index=4,
       number=5, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='price', full_name='com.activequant.messages.ExecutionReport.price', index=5,
       number=6, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='tradInstId', full_name='com.activequant.messages.ExecutionReport.tradInstId', index=6,
       number=7, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='transactTime', full_name='com.activequant.messages.ExecutionReport.transactTime', index=7,
       number=8, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='orderId', full_name='com.activequant.messages.ExecutionReport.orderId', index=8,
       number=9, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='execType', full_name='com.activequant.messages.ExecutionReport.execType', index=9,
       number=10, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='ordStatus', full_name='com.activequant.messages.ExecutionReport.ordStatus', index=10,
       number=11, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='cumQty', full_name='com.activequant.messages.ExecutionReport.cumQty', index=11,
       number=12, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='leavesQty', full_name='com.activequant.messages.ExecutionReport.leavesQty', index=12,
       number=13, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='avgPx', full_name='com.activequant.messages.ExecutionReport.avgPx', index=13,
       number=14, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='ordType', full_name='com.activequant.messages.ExecutionReport.ordType', index=14,
       number=16, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='text', full_name='com.activequant.messages.ExecutionReport.text', index=15,
       number=17, type=9, cpp_type=9, label=1,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='comment', full_name='com.activequant.messages.ExecutionReport.comment', index=16,
       number=19, type=9, cpp_type=9, label=1,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='massStatusReqId', full_name='com.activequant.messages.ExecutionReport.massStatusReqId', index=17,
+      number=20, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -537,62 +622,68 @@ _EXECUTIONREPORT = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.ExecutionReport.cmd', index=0,
       number=106, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1722,
+  serialized_end=2151,
+)
 
 
 _ORDERCANCELREQUEST = descriptor.Descriptor(
   name='OrderCancelRequest',
   full_name='com.activequant.messages.OrderCancelRequest',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='orgCldOrdId', full_name='com.activequant.messages.OrderCancelRequest.orgCldOrdId', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderCancelRequest.clOrdId', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='tradInstId', full_name='com.activequant.messages.OrderCancelRequest.tradInstId', index=2,
       number=3, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='side', full_name='com.activequant.messages.OrderCancelRequest.side', index=3,
       number=4, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='orderQty', full_name='com.activequant.messages.OrderCancelRequest.orderQty', index=4,
       number=6, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='comment', full_name='com.activequant.messages.OrderCancelRequest.comment', index=5,
       number=19, type=9, cpp_type=9, label=1,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -601,76 +692,82 @@ _ORDERCANCELREQUEST = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderCancelRequest.cmd', index=0,
       number=107, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2154,
+  serialized_end=2379,
+)
 
 
 _ORDERCANCELREJECT = descriptor.Descriptor(
   name='OrderCancelReject',
   full_name='com.activequant.messages.OrderCancelReject',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='tradInstId', full_name='com.activequant.messages.OrderCancelReject.tradInstId', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderCancelReject.clOrdId', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='orgClOrdId', full_name='com.activequant.messages.OrderCancelReject.orgClOrdId', index=2,
       number=3, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='ordStatus', full_name='com.activequant.messages.OrderCancelReject.ordStatus', index=3,
       number=4, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='CxlRejResponseTo', full_name='com.activequant.messages.OrderCancelReject.CxlRejResponseTo', index=4,
       number=5, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='clxRejReason', full_name='com.activequant.messages.OrderCancelReject.clxRejReason', index=5,
       number=6, type=9, cpp_type=9, label=1,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='text', full_name='com.activequant.messages.OrderCancelReject.text', index=6,
       number=7, type=9, cpp_type=9, label=1,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='comment', full_name='com.activequant.messages.OrderCancelReject.comment', index=7,
       number=19, type=9, cpp_type=9, label=1,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -679,90 +776,96 @@ _ORDERCANCELREJECT = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderCancelReject.cmd', index=0,
       number=108, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2382,
+  serialized_end=2653,
+)
 
 
 _ORDERCANCELREPLACEREQUEST = descriptor.Descriptor(
   name='OrderCancelReplaceRequest',
   full_name='com.activequant.messages.OrderCancelReplaceRequest',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='tradInstId', full_name='com.activequant.messages.OrderCancelReplaceRequest.tradInstId', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderCancelReplaceRequest.clOrdId', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='orgClOrdId', full_name='com.activequant.messages.OrderCancelReplaceRequest.orgClOrdId', index=2,
       number=3, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='side', full_name='com.activequant.messages.OrderCancelReplaceRequest.side', index=3,
       number=4, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='transactTime', full_name='com.activequant.messages.OrderCancelReplaceRequest.transactTime', index=4,
       number=5, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='orderQty', full_name='com.activequant.messages.OrderCancelReplaceRequest.orderQty', index=5,
       number=6, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='ordType', full_name='com.activequant.messages.OrderCancelReplaceRequest.ordType', index=6,
       number=7, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='price', full_name='com.activequant.messages.OrderCancelReplaceRequest.price', index=7,
       number=8, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='timeInForce', full_name='com.activequant.messages.OrderCancelReplaceRequest.timeInForce', index=8,
       number=9, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='comment', full_name='com.activequant.messages.OrderCancelReplaceRequest.comment', index=9,
       number=19, type=9, cpp_type=9, label=1,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -771,97 +874,103 @@ _ORDERCANCELREPLACEREQUEST = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderCancelReplaceRequest.cmd', index=0,
       number=109, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2656,
+  serialized_end=2969,
+)
 
 
 _NEWORDER = descriptor.Descriptor(
   name='NewOrder',
   full_name='com.activequant.messages.NewOrder',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='tradInstId', full_name='com.activequant.messages.NewOrder.tradInstId', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.NewOrder.clOrdId', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='orgClOrdId', full_name='com.activequant.messages.NewOrder.orgClOrdId', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='side', full_name='com.activequant.messages.NewOrder.side', index=3,
       number=4, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='transactTime', full_name='com.activequant.messages.NewOrder.transactTime', index=4,
       number=5, type=9, cpp_type=9, label=1,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='orderQty', full_name='com.activequant.messages.NewOrder.orderQty', index=5,
       number=6, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='ordType', full_name='com.activequant.messages.NewOrder.ordType', index=6,
       number=7, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='price', full_name='com.activequant.messages.NewOrder.price', index=7,
       number=8, type=1, cpp_type=5, label=1,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='timeInForce', full_name='com.activequant.messages.NewOrder.timeInForce', index=8,
       number=9, type=5, cpp_type=1, label=1,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='comment', full_name='com.activequant.messages.NewOrder.comment', index=9,
       number=19, type=9, cpp_type=9, label=1,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='resend', full_name='com.activequant.messages.NewOrder.resend', index=10,
       number=20, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -870,27 +979,33 @@ _NEWORDER = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.NewOrder.cmd', index=0,
       number=110, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2972,
+  serialized_end=3267,
+)
 
 
 _ORDERSUBMITTED = descriptor.Descriptor(
   name='OrderSubmitted',
   full_name='com.activequant.messages.OrderSubmitted',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderSubmitted.clOrdId', index=0,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -899,27 +1014,33 @@ _ORDERSUBMITTED = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderSubmitted.cmd', index=0,
       number=111, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3269,
+  serialized_end=3396,
+)
 
 
 _ORDERACCEPTED = descriptor.Descriptor(
   name='OrderAccepted',
   full_name='com.activequant.messages.OrderAccepted',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderAccepted.clOrdId', index=0,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -928,27 +1049,33 @@ _ORDERACCEPTED = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderAccepted.cmd', index=0,
       number=112, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3398,
+  serialized_end=3523,
+)
 
 
 _ORDERCANCELLED = descriptor.Descriptor(
   name='OrderCancelled',
   full_name='com.activequant.messages.OrderCancelled',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderCancelled.clOrdId', index=0,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -957,27 +1084,33 @@ _ORDERCANCELLED = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderCancelled.cmd', index=0,
       number=113, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3525,
+  serialized_end=3652,
+)
 
 
 _ORDERUPDATED = descriptor.Descriptor(
   name='OrderUpdated',
   full_name='com.activequant.messages.OrderUpdated',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderUpdated.clOrdId', index=0,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -986,34 +1119,40 @@ _ORDERUPDATED = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderUpdated.cmd', index=0,
       number=114, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3654,
+  serialized_end=3777,
+)
 
 
 _SECURITYSTATUS = descriptor.Descriptor(
   name='SecurityStatus',
   full_name='com.activequant.messages.SecurityStatus',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='tdiId', full_name='com.activequant.messages.SecurityStatus.tdiId', index=0,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='status', full_name='com.activequant.messages.SecurityStatus.status', index=1,
       number=3, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1022,34 +1161,40 @@ _SECURITYSTATUS = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.SecurityStatus.cmd', index=0,
       number=115, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3780,
+  serialized_end=3921,
+)
 
 
 _ORDERREJECTED = descriptor.Descriptor(
   name='OrderRejected',
   full_name='com.activequant.messages.OrderRejected',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderRejected.clOrdId', index=0,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='reason', full_name='com.activequant.messages.OrderRejected.reason', index=1,
       number=3, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1058,27 +1203,33 @@ _ORDERREJECTED = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderRejected.cmd', index=0,
       number=116, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3924,
+  serialized_end=4065,
+)
 
 
 _ORDERUPDATESUBMITTED = descriptor.Descriptor(
   name='OrderUpdateSubmitted',
   full_name='com.activequant.messages.OrderUpdateSubmitted',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderUpdateSubmitted.clOrdId', index=0,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1087,27 +1238,33 @@ _ORDERUPDATESUBMITTED = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderUpdateSubmitted.cmd', index=0,
       number=117, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4068,
+  serialized_end=4207,
+)
 
 
 _ORDERCANCELSUBMITTED = descriptor.Descriptor(
   name='OrderCancelSubmitted',
   full_name='com.activequant.messages.OrderCancelSubmitted',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderCancelSubmitted.clOrdId', index=0,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1116,34 +1273,40 @@ _ORDERCANCELSUBMITTED = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderCancelSubmitted.cmd', index=0,
       number=118, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4210,
+  serialized_end=4349,
+)
 
 
 _ORDERUPDATEREJECTED = descriptor.Descriptor(
   name='OrderUpdateRejected',
   full_name='com.activequant.messages.OrderUpdateRejected',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.OrderUpdateRejected.clOrdId', index=0,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='reason', full_name='com.activequant.messages.OrderUpdateRejected.reason', index=1,
       number=3, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1152,83 +1315,89 @@ _ORDERUPDATEREJECTED = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OrderUpdateRejected.cmd', index=0,
       number=119, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4352,
+  serialized_end=4505,
+)
 
 
 _EXECUTIONREPORT2 = descriptor.Descriptor(
   name='ExecutionReport2',
   full_name='com.activequant.messages.ExecutionReport2',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='clOrdId', full_name='com.activequant.messages.ExecutionReport2.clOrdId', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='execId', full_name='com.activequant.messages.ExecutionReport2.execId', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='side', full_name='com.activequant.messages.ExecutionReport2.side', index=2,
       number=3, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='price', full_name='com.activequant.messages.ExecutionReport2.price', index=3,
       number=6, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='tdiId', full_name='com.activequant.messages.ExecutionReport2.tdiId', index=4,
       number=7, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='transactTime', full_name='com.activequant.messages.ExecutionReport2.transactTime', index=5,
       number=8, type=3, cpp_type=2, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='qty', full_name='com.activequant.messages.ExecutionReport2.qty', index=6,
       number=13, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='resend', full_name='com.activequant.messages.ExecutionReport2.resend', index=7,
       number=14, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='quantityLeft', full_name='com.activequant.messages.ExecutionReport2.quantityLeft', index=8,
       number=15, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1237,27 +1406,33 @@ _EXECUTIONREPORT2 = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.ExecutionReport2.cmd', index=0,
       number=120, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4508,
+  serialized_end=4772,
+)
 
 
 _CUSTOMCOMMAND = descriptor.Descriptor(
   name='CustomCommand',
   full_name='com.activequant.messages.CustomCommand',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='command', full_name='com.activequant.messages.CustomCommand.command', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1266,34 +1441,40 @@ _CUSTOMCOMMAND = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.CustomCommand.cmd', index=0,
       number=121, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4774,
+  serialized_end=4899,
+)
 
 
 _INFOEVENT = descriptor.Descriptor(
   name='InfoEvent',
   full_name='com.activequant.messages.InfoEvent',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='message', full_name='com.activequant.messages.InfoEvent.message', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='timestamp', full_name='com.activequant.messages.InfoEvent.timestamp', index=1,
       number=2, type=3, cpp_type=2, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1302,69 +1483,75 @@ _INFOEVENT = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.InfoEvent.cmd', index=0,
       number=122, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4902,
+  serialized_end=5038,
+)
 
 
 _OHLC = descriptor.Descriptor(
   name='OHLC',
   full_name='com.activequant.messages.OHLC',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='timestamp', full_name='com.activequant.messages.OHLC.timestamp', index=0,
       number=1, type=3, cpp_type=2, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='mdiId', full_name='com.activequant.messages.OHLC.mdiId', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='open', full_name='com.activequant.messages.OHLC.open', index=2,
       number=3, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='high', full_name='com.activequant.messages.OHLC.high', index=3,
       number=4, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='low', full_name='com.activequant.messages.OHLC.low', index=4,
       number=5, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='close', full_name='com.activequant.messages.OHLC.close', index=5,
       number=6, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='volume', full_name='com.activequant.messages.OHLC.volume', index=6,
       number=7, type=1, cpp_type=5, label=1,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1373,55 +1560,61 @@ _OHLC = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.OHLC.cmd', index=0,
       number=123, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5041,
+  serialized_end=5237,
+)
 
 
 _TICK = descriptor.Descriptor(
   name='Tick',
   full_name='com.activequant.messages.Tick',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='timestamp', full_name='com.activequant.messages.Tick.timestamp', index=0,
       number=1, type=3, cpp_type=2, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='mdiId', full_name='com.activequant.messages.Tick.mdiId', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='price', full_name='com.activequant.messages.Tick.price', index=2,
       number=3, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='quantity', full_name='com.activequant.messages.Tick.quantity', index=3,
       number=4, type=1, cpp_type=5, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='tickDirection', full_name='com.activequant.messages.Tick.tickDirection', index=4,
       number=5, type=5, cpp_type=1, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1430,55 +1623,61 @@ _TICK = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.Tick.cmd', index=0,
       number=124, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5240,
+  serialized_end=5420,
+)
 
 
 _VALUESET = descriptor.Descriptor(
   name='ValueSet',
   full_name='com.activequant.messages.ValueSet',
-  filename='messages.proto',
+  filename=None,
+  file=DESCRIPTOR,
   containing_type=None,
   fields=[
     descriptor.FieldDescriptor(
       name='timestamp', full_name='com.activequant.messages.ValueSet.timestamp', index=0,
       number=1, type=3, cpp_type=2, label=2,
-      default_value=0,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='type', full_name='com.activequant.messages.ValueSet.type', index=1,
       number=2, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='id', full_name='com.activequant.messages.ValueSet.id', index=2,
       number=3, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='field', full_name='com.activequant.messages.ValueSet.field', index=3,
       number=4, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='value', full_name='com.activequant.messages.ValueSet.value', index=4,
       number=5, type=9, cpp_type=9, label=2,
-      default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1487,126 +1686,576 @@ _VALUESET = descriptor.Descriptor(
     descriptor.FieldDescriptor(
       name='cmd', full_name='com.activequant.messages.ValueSet.cmd', index=0,
       number=125, type=11, cpp_type=10, label=2,
-      default_value=None,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=True, extension_scope=None,
       options=None),
   ],
-  nested_types=[],  # TODO(robinson): Implement.
+  nested_types=[],
   enum_types=[
   ],
-  options=None)
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5423,
+  serialized_end=5596,
+)
 
+
+_MDSUBSCRIBE = descriptor.Descriptor(
+  name='MDSubscribe',
+  full_name='com.activequant.messages.MDSubscribe',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    descriptor.FieldDescriptor(
+      name='mdiId', full_name='com.activequant.messages.MDSubscribe.mdiId', index=0,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='timeframe', full_name='com.activequant.messages.MDSubscribe.timeframe', index=1,
+      number=3, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+    descriptor.FieldDescriptor(
+      name='cmd', full_name='com.activequant.messages.MDSubscribe.cmd', index=0,
+      number=126, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=True, extension_scope=None,
+      options=None),
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5599,
+  serialized_end=5737,
+)
+
+
+_MDUNSUBSCRIBE = descriptor.Descriptor(
+  name='MDUnsubscribe',
+  full_name='com.activequant.messages.MDUnsubscribe',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    descriptor.FieldDescriptor(
+      name='mdiId', full_name='com.activequant.messages.MDUnsubscribe.mdiId', index=0,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='timeframe', full_name='com.activequant.messages.MDUnsubscribe.timeframe', index=1,
+      number=3, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+    descriptor.FieldDescriptor(
+      name='cmd', full_name='com.activequant.messages.MDUnsubscribe.cmd', index=0,
+      number=127, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=True, extension_scope=None,
+      options=None),
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5740,
+  serialized_end=5882,
+)
+
+
+_MDSUBSCRIBERESPONSE = descriptor.Descriptor(
+  name='MDSubscribeResponse',
+  full_name='com.activequant.messages.MDSubscribeResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    descriptor.FieldDescriptor(
+      name='status', full_name='com.activequant.messages.MDSubscribeResponse.status', index=0,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='flag', full_name='com.activequant.messages.MDSubscribeResponse.flag', index=1,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+    descriptor.FieldDescriptor(
+      name='cmd', full_name='com.activequant.messages.MDSubscribeResponse.cmd', index=0,
+      number=128, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=True, extension_scope=None,
+      options=None),
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5885,
+  serialized_end=6036,
+)
+
+
+_MDUNSUBSCRIBERESPONSE = descriptor.Descriptor(
+  name='MDUnsubscribeResponse',
+  full_name='com.activequant.messages.MDUnsubscribeResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    descriptor.FieldDescriptor(
+      name='status', full_name='com.activequant.messages.MDUnsubscribeResponse.status', index=0,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='flag', full_name='com.activequant.messages.MDUnsubscribeResponse.flag', index=1,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+    descriptor.FieldDescriptor(
+      name='cmd', full_name='com.activequant.messages.MDUnsubscribeResponse.cmd', index=0,
+      number=129, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=True, extension_scope=None,
+      options=None),
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=6039,
+  serialized_end=6192,
+)
+
+
+_HISTREQUEST = descriptor.Descriptor(
+  name='HistRequest',
+  full_name='com.activequant.messages.HistRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    descriptor.FieldDescriptor(
+      name='mdiId', full_name='com.activequant.messages.HistRequest.mdiId', index=0,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='startDate8', full_name='com.activequant.messages.HistRequest.startDate8', index=1,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='endDate8', full_name='com.activequant.messages.HistRequest.endDate8', index=2,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='timeframe', full_name='com.activequant.messages.HistRequest.timeframe', index=3,
+      number=5, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+    descriptor.FieldDescriptor(
+      name='cmd', full_name='com.activequant.messages.HistRequest.cmd', index=0,
+      number=130, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=True, extension_scope=None,
+      options=None),
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=6195,
+  serialized_end=6372,
+)
+
+
+_HISTOHLCRESPONSE = descriptor.Descriptor(
+  name='HistOhlcResponse',
+  full_name='com.activequant.messages.HistOhlcResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    descriptor.FieldDescriptor(
+      name='mdiId', full_name='com.activequant.messages.HistOhlcResponse.mdiId', index=0,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='timestamp', full_name='com.activequant.messages.HistOhlcResponse.timestamp', index=1,
+      number=3, type=3, cpp_type=2, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='open', full_name='com.activequant.messages.HistOhlcResponse.open', index=2,
+      number=4, type=1, cpp_type=5, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='high', full_name='com.activequant.messages.HistOhlcResponse.high', index=3,
+      number=5, type=1, cpp_type=5, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='low', full_name='com.activequant.messages.HistOhlcResponse.low', index=4,
+      number=6, type=1, cpp_type=5, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='close', full_name='com.activequant.messages.HistOhlcResponse.close', index=5,
+      number=7, type=1, cpp_type=5, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='volume', full_name='com.activequant.messages.HistOhlcResponse.volume', index=6,
+      number=8, type=1, cpp_type=5, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='final', full_name='com.activequant.messages.HistOhlcResponse.final', index=7,
+      number=9, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='errorCode', full_name='com.activequant.messages.HistOhlcResponse.errorCode', index=8,
+      number=10, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='errorMessage', full_name='com.activequant.messages.HistOhlcResponse.errorMessage', index=9,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+    descriptor.FieldDescriptor(
+      name='cmd', full_name='com.activequant.messages.HistOhlcResponse.cmd', index=0,
+      number=131, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=True, extension_scope=None,
+      options=None),
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=6375,
+  serialized_end=6652,
+)
 
 _BASEMESSAGE.fields_by_name['type'].enum_type = _BASEMESSAGE_COMMANDTYPE
+_BASEMESSAGE_COMMANDTYPE.containing_type = _BASEMESSAGE;
+DESCRIPTOR.message_types_by_name['BaseMessage'] = _BASEMESSAGE
+DESCRIPTOR.message_types_by_name['Login'] = _LOGIN
+DESCRIPTOR.message_types_by_name['ServerTime'] = _SERVERTIME
+DESCRIPTOR.message_types_by_name['LoginResponse'] = _LOGINRESPONSE
+DESCRIPTOR.message_types_by_name['MarketDataSnapshot'] = _MARKETDATASNAPSHOT
+DESCRIPTOR.message_types_by_name['AccountDataMessage'] = _ACCOUNTDATAMESSAGE
+DESCRIPTOR.message_types_by_name['PositionReport'] = _POSITIONREPORT
+DESCRIPTOR.message_types_by_name['ExecutionReport'] = _EXECUTIONREPORT
+DESCRIPTOR.message_types_by_name['OrderCancelRequest'] = _ORDERCANCELREQUEST
+DESCRIPTOR.message_types_by_name['OrderCancelReject'] = _ORDERCANCELREJECT
+DESCRIPTOR.message_types_by_name['OrderCancelReplaceRequest'] = _ORDERCANCELREPLACEREQUEST
+DESCRIPTOR.message_types_by_name['NewOrder'] = _NEWORDER
+DESCRIPTOR.message_types_by_name['OrderSubmitted'] = _ORDERSUBMITTED
+DESCRIPTOR.message_types_by_name['OrderAccepted'] = _ORDERACCEPTED
+DESCRIPTOR.message_types_by_name['OrderCancelled'] = _ORDERCANCELLED
+DESCRIPTOR.message_types_by_name['OrderUpdated'] = _ORDERUPDATED
+DESCRIPTOR.message_types_by_name['SecurityStatus'] = _SECURITYSTATUS
+DESCRIPTOR.message_types_by_name['OrderRejected'] = _ORDERREJECTED
+DESCRIPTOR.message_types_by_name['OrderUpdateSubmitted'] = _ORDERUPDATESUBMITTED
+DESCRIPTOR.message_types_by_name['OrderCancelSubmitted'] = _ORDERCANCELSUBMITTED
+DESCRIPTOR.message_types_by_name['OrderUpdateRejected'] = _ORDERUPDATEREJECTED
+DESCRIPTOR.message_types_by_name['ExecutionReport2'] = _EXECUTIONREPORT2
+DESCRIPTOR.message_types_by_name['CustomCommand'] = _CUSTOMCOMMAND
+DESCRIPTOR.message_types_by_name['InfoEvent'] = _INFOEVENT
+DESCRIPTOR.message_types_by_name['OHLC'] = _OHLC
+DESCRIPTOR.message_types_by_name['Tick'] = _TICK
+DESCRIPTOR.message_types_by_name['ValueSet'] = _VALUESET
+DESCRIPTOR.message_types_by_name['MDSubscribe'] = _MDSUBSCRIBE
+DESCRIPTOR.message_types_by_name['MDUnsubscribe'] = _MDUNSUBSCRIBE
+DESCRIPTOR.message_types_by_name['MDSubscribeResponse'] = _MDSUBSCRIBERESPONSE
+DESCRIPTOR.message_types_by_name['MDUnsubscribeResponse'] = _MDUNSUBSCRIBERESPONSE
+DESCRIPTOR.message_types_by_name['HistRequest'] = _HISTREQUEST
+DESCRIPTOR.message_types_by_name['HistOhlcResponse'] = _HISTOHLCRESPONSE
 
 class BaseMessage(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _BASEMESSAGE
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.BaseMessage)
 
 class Login(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _LOGIN
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.Login)
 
 class ServerTime(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _SERVERTIME
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.ServerTime)
 
 class LoginResponse(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _LOGINRESPONSE
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.LoginResponse)
 
 class MarketDataSnapshot(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _MARKETDATASNAPSHOT
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.MarketDataSnapshot)
 
 class AccountDataMessage(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ACCOUNTDATAMESSAGE
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.AccountDataMessage)
 
 class PositionReport(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _POSITIONREPORT
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.PositionReport)
 
 class ExecutionReport(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _EXECUTIONREPORT
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.ExecutionReport)
 
 class OrderCancelRequest(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERCANCELREQUEST
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderCancelRequest)
 
 class OrderCancelReject(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERCANCELREJECT
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderCancelReject)
 
 class OrderCancelReplaceRequest(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERCANCELREPLACEREQUEST
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderCancelReplaceRequest)
 
 class NewOrder(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _NEWORDER
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.NewOrder)
 
 class OrderSubmitted(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERSUBMITTED
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderSubmitted)
 
 class OrderAccepted(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERACCEPTED
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderAccepted)
 
 class OrderCancelled(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERCANCELLED
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderCancelled)
 
 class OrderUpdated(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERUPDATED
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderUpdated)
 
 class SecurityStatus(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _SECURITYSTATUS
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.SecurityStatus)
 
 class OrderRejected(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERREJECTED
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderRejected)
 
 class OrderUpdateSubmitted(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERUPDATESUBMITTED
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderUpdateSubmitted)
 
 class OrderCancelSubmitted(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERCANCELSUBMITTED
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderCancelSubmitted)
 
 class OrderUpdateRejected(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _ORDERUPDATEREJECTED
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OrderUpdateRejected)
 
 class ExecutionReport2(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _EXECUTIONREPORT2
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.ExecutionReport2)
 
 class CustomCommand(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _CUSTOMCOMMAND
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.CustomCommand)
 
 class InfoEvent(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _INFOEVENT
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.InfoEvent)
 
 class OHLC(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _OHLC
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.OHLC)
 
 class Tick(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _TICK
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.Tick)
 
 class ValueSet(message.Message):
   __metaclass__ = reflection.GeneratedProtocolMessageType
   DESCRIPTOR = _VALUESET
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.ValueSet)
+
+class MDSubscribe(message.Message):
+  __metaclass__ = reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _MDSUBSCRIBE
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.MDSubscribe)
+
+class MDUnsubscribe(message.Message):
+  __metaclass__ = reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _MDUNSUBSCRIBE
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.MDUnsubscribe)
+
+class MDSubscribeResponse(message.Message):
+  __metaclass__ = reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _MDSUBSCRIBERESPONSE
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.MDSubscribeResponse)
+
+class MDUnsubscribeResponse(message.Message):
+  __metaclass__ = reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _MDUNSUBSCRIBERESPONSE
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.MDUnsubscribeResponse)
+
+class HistRequest(message.Message):
+  __metaclass__ = reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _HISTREQUEST
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.HistRequest)
+
+class HistOhlcResponse(message.Message):
+  __metaclass__ = reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _HISTOHLCRESPONSE
+  
+  # @@protoc_insertion_point(class_scope:com.activequant.messages.HistOhlcResponse)
 
 _LOGIN.extensions_by_name['cmd'].message_type = _LOGIN
 BaseMessage.RegisterExtension(_LOGIN.extensions_by_name['cmd'])
@@ -1660,3 +2309,16 @@ _TICK.extensions_by_name['cmd'].message_type = _TICK
 BaseMessage.RegisterExtension(_TICK.extensions_by_name['cmd'])
 _VALUESET.extensions_by_name['cmd'].message_type = _VALUESET
 BaseMessage.RegisterExtension(_VALUESET.extensions_by_name['cmd'])
+_MDSUBSCRIBE.extensions_by_name['cmd'].message_type = _MDSUBSCRIBE
+BaseMessage.RegisterExtension(_MDSUBSCRIBE.extensions_by_name['cmd'])
+_MDUNSUBSCRIBE.extensions_by_name['cmd'].message_type = _MDUNSUBSCRIBE
+BaseMessage.RegisterExtension(_MDUNSUBSCRIBE.extensions_by_name['cmd'])
+_MDSUBSCRIBERESPONSE.extensions_by_name['cmd'].message_type = _MDSUBSCRIBERESPONSE
+BaseMessage.RegisterExtension(_MDSUBSCRIBERESPONSE.extensions_by_name['cmd'])
+_MDUNSUBSCRIBERESPONSE.extensions_by_name['cmd'].message_type = _MDSUBSCRIBERESPONSE
+BaseMessage.RegisterExtension(_MDUNSUBSCRIBERESPONSE.extensions_by_name['cmd'])
+_HISTREQUEST.extensions_by_name['cmd'].message_type = _HISTREQUEST
+BaseMessage.RegisterExtension(_HISTREQUEST.extensions_by_name['cmd'])
+_HISTOHLCRESPONSE.extensions_by_name['cmd'].message_type = _HISTOHLCRESPONSE
+BaseMessage.RegisterExtension(_HISTOHLCRESPONSE.extensions_by_name['cmd'])
+# @@protoc_insertion_point(module_scope)

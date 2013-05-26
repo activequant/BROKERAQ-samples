@@ -13,4 +13,4 @@ aqsPrice = AqSocket(MyListener())
 aqsPrice.host = '192.168.0.6'
 aqsPrice.connect()
 aqsPrice.login("ustaudinger2", "abcd1234", "PRICE")
-aqsPrice.subscribe(Symbols.AUDCHF, "RAW")
+aqsPrice.subscribe(Symbols.AUDCHF, TimeFrames.RAW)
