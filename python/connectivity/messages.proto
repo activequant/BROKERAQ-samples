@@ -289,11 +289,13 @@ message InfoEvent {
 	required int64 timestamp = 2;
 }
 
+
 message OHLC {
 	extend BaseMessage {
     	required OHLC cmd = 123;
     }
 	required int64 timestamp = 1;
+	required int32 timeFrame = 8;   # time frame is in minutes. 
 	required string mdiId = 2; 
 	required double open = 3;
 	required double high = 4; 

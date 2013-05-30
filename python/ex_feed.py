@@ -10,17 +10,11 @@ class MyListener(MessageListener):
 
 
 aqsPrice = AqSocket(MyListener())
-<<<<<<< HEAD
 aqsPrice.host = 'localhost'
 aqsPrice.connect()
 aqsPrice.login("ustaudinger2", "abcd1234", "PRICE")
-aqsPrice.subscribe(Symbols.GBPNOK, TimeFrames.RAW)
-aqsPrice.subscribe(Symbols.CHFNOK, TimeFrames.RAW)
-aqsPrice.subscribe(Symbols.SMICHF, TimeFrames.RAW)
+aqsPrice.subscribe(Symbols.GBPNOK, TimeFrames.MINUTES_1)
+aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.MINUTES_1)
+# aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.RAW)
+aqsPrice.subscribe(Symbols.SMICHF, TimeFrames.MINUTES_1)
 aqsPrice.subscribe(Symbols.DAXEUR, TimeFrames.RAW)
-=======
-aqsPrice.host = '192.168.0.6'
-aqsPrice.connect()
-aqsPrice.login("ustaudinger2", "abcd1234", "PRICE")
-aqsPrice.subscribe(Symbols.AUDCHF, TimeFrames.RAW)
->>>>>>> d74cca68dcf47c125011f844bb6c14cda5a6f48d
