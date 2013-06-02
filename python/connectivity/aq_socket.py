@@ -4,6 +4,7 @@
 import threading
 import socket 
 import struct
+import logging
 from messages_pb2 import *
 from bincalc import *
 from message_listener import *
@@ -12,12 +13,18 @@ class AqSocket (threading.Thread):
 
     sock = None 
     messageListener = None
-    host = 'brokeraq.com'
+    host = 'localhost'
     port = 59999   
     orderCounter = 0
+    logger = None
+
     
     # plain constructor. 
     def __init__(self, mlistener):
+        logging.basicConfig(format='%(asctime)-15s %(name)s %(message)s')
+        self.logger = logging.getLogger('AQSocket')
+        self.logger.setLevel(logging.INFO)
+        self.logger.info('Initializing AQSocket.')
         threading.Thread.__init__(self)
         self.messageListener = mlistener
         
@@ -25,14 +32,14 @@ class AqSocket (threading.Thread):
     def connect(self):         
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.host, self.port))
-        print 'connected...'
+        self.logger.info('socket connected')
         if self.messageListener != None:
             self.messageListener.connected()
         self.start()
         
     # read loop
     def run(self):
-        print 'Going into read mode ...'        
+        self.logger.info('Spawned new thread in read mode ...')        
         lengthBytes = []                    
         while 1:            
             data = self.sock.recv(1)
@@ -51,13 +58,14 @@ class AqSocket (threading.Thread):
     # method to send a base message. 
     # gets the Varint32 encoded length as bytes, sends these and then sends the base message
     def sendFrame(self, baseMsg):
-        print 'sending frame ...'
+        self.logger.debug('sending frame to server.')
         b = numberToVarint(len(baseMsg))
         # send the frame
         self.sock.sendall(b)
         self.sock.sendall(baseMsg)
             
     def subscribe(self, instrumentId, timeframe):
+        self.logger.info('Subscribing to %s with resolution %s', instrumentId, timeframe)
         baseMsg = BaseMessage()
         baseMsg.type = BaseMessage.MD_SUBSCRIBE
         req = baseMsg.Extensions[MDSubscribe.cmd]
@@ -66,6 +74,7 @@ class AqSocket (threading.Thread):
         self.sendFrame(baseMsg.SerializeToString())
     
     def unsubscribe(self, instrumentId, timeframe):
+        self.logger.info('Unsubscribing from %s with resolution %s', instrumentId, timeframe)
         baseMsg = BaseMessage()
         baseMsg.type = BaseMessage.MD_UNSUBSCRIBE
         req = baseMsg.Extensions[MDUnsubscribe.cmd]
@@ -74,6 +83,7 @@ class AqSocket (threading.Thread):
         self.sendFrame(baseMsg.SerializeToString())
     
     def requestHistory(self, instrumentId, timeframe, startDate8, endDate8):
+        self.logger.info('Requesting history for %s with resolution %s', instrumentId, timeframe)
         baseMsg = BaseMessage()
         baseMsg.type = BaseMessage.HIST_REQUEST
         req = baseMsg.Extensions[HistRequest.cmd]
@@ -129,6 +139,7 @@ class AqSocket (threading.Thread):
     
     # sends a login message over the wire
     def login(self, username, password, session):
+      self.logger.info('Preparing login message for a %s session for %s', session, username)
       # let's construct a login message
       baseMsg = BaseMessage()
       baseMsg.type = BaseMessage.LOGIN      
@@ -141,7 +152,8 @@ class AqSocket (threading.Thread):
       self.sendFrame(msg)
     
     # this raw method creates a base message from an input string. 
-    def decodeBaseMessage(self, message): 
+    def decodeBaseMessage(self, message):
+        self.logger.debug('Decoding a base message. ')
         baseMessage = BaseMessage()
         baseMessage.ParseFromString(message)
         # print baseMessage

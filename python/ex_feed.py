@@ -10,7 +10,7 @@ class MyListener(MessageListener):
 
 
 aqsPrice = AqSocket(MyListener())
-aqsPrice.host = 'localhost'
+aqsPrice.host = '78.47.96.150'
 aqsPrice.connect()
 aqsPrice.login("ustaudinger2", "abcd1234", "PRICE")
 aqsPrice.subscribe(Symbols.GBPNOK, TimeFrames.MINUTES_1)

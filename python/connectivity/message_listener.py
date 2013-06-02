@@ -8,11 +8,9 @@ class MessageListener:
     logger = None
     
     def __init__(self):
-        self.logger = logging.getLogger('MessageListener')
-        sh = logging.StreamHandler()
-        sh.setLevel(logging.INFO)
-        sh.setFormatter(logging.Formatter('%(asctime)-15s %(clientip)s %(user)-8s %(message)s'))        
-        self.logger.addHandler(sh)
+        logging.basicConfig(format='%(asctime)-15s %(name)s %(message)s')
+        self.logger = logging.getLogger('AQSocket')
+        self.logger.setLevel(logging.INFO)
         self.logger.info('Initializing message listener.')
         return
     
@@ -24,11 +22,9 @@ class MessageListener:
         
     def loggedIn(self):
         self.logger.info('Logged in ')
-        print 'logged in'
     
     def loginRejected(self, message):
-        self.logger.info('Login rejected. ', message)
-        print message
+        self.logger.info('Login rejected: %s', message)
         
     # base messages are all raw protobuf messages.
     def process(self, baseMessage):
@@ -69,51 +65,51 @@ class MessageListener:
 
     # the server sends out the server time in regular intervals. 
     def serverTime(self, serverTime):
-        print 'The server says, it is ', datetime.datetime.fromtimestamp(serverTime.timestamp/1000000000).strftime('%Y-%m-%d %H:%M:%S'), ' local time.'
+        self.logger.info('The server says, it is %s local time.', datetime.datetime.fromtimestamp(serverTime.timestamp/1000000000).strftime('%Y-%m-%d %H:%M:%S'))
         return
         
     # account data contains account specifics, such as cash. 
     def accountData(self, accountMessage):
-        print '=== Account data ==='
-        print accountMessage
-        print '--------------------'
+        self.logger.info('=== Account data ===')
+        self.logger.info(accountMessage)
+        self.logger.info('--------------------')
         return
     
     # position reports contain an overview of a position       
     def positionReport(self, positionReport):
-        print '=== Position report ==='
-        print positionReport
-        print '-----------------------'
+        self.logger.info('=== Position report ===')
+        self.logger.info(positionReport)
+        self.logger.info('-----------------------')
         return
     
     # an execution report contains all reports about executed order instructions. 
     # This includes cancellations, rejections, acceptance but also order fills. 
     def executionReport(self, executionReport):
-        print '=== Execution report ==='
-        print executionReport
-        print '------------------------'
+        self.logger.info('=== Execution report ===')
+        self.logger.info(executionReport)
+        self.logger.info('------------------------')
         return        
 
     def mdSubscribeResponse(self, mdSubRes):
-        print '=== MD Subscribe Response ==='
-        print mdSubRes
-        print '-----------------------------'
+        self.logger.info('=== MD Subscribe Response ===')
+        self.logger.info(mdSubRes)
+        self.logger.info('-----------------------------')
         return
         
     def mdUnsubscribeResponse(self, mdUnsubRes):
-        print '=== MD Unsubscribe Response ==='
-        print mdUnsubRes
-        print '-------------------------------'
+        self.logger.info('=== MD Unsubscribe Response ===')
+        self.logger.info(mdUnsubRes)
+        self.logger.info('-------------------------------')
         return    
     
     def ohlc(self, ohlc):
-        print '=== OHLC ==='
-        print ohlc
-        print '------------'
+        self.logger.info('=== OHLC ===')
+        self.logger.info(ohlc)
+        self.logger.info('------------')
         return
         
     def historicalOHLC(self, historicalData):
-        print '=== Historical data ==='
-        print historicalData
-        print '-----------------------'
+        self.logger.info('=== Historical data ===')
+        self.logger.info(historicalData)
+        self.logger.info('-----------------------')
     
