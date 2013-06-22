@@ -101,18 +101,68 @@ class AqSocket (threading.Thread):
         orderMsg = baseMsg.Extensions[NewOrder.cmd]
         # order type 1
         oid = self.genOid()
+        orderMsg.tradInstId = instrumentId
+        orderMsg.clOrdId = '%s' % oid
+        orderMsg.side = 1
+        orderMsg.orderQty = quantity
+        orderMsg.ordType = 1
+        orderMsg.comment = 'API'
+        orderMsg.resend = 0	
+        self.sendFrame(baseMsg.SerializeToString())
         return oid
     
     # issues a market sell order - order type 1. 
     def marketSell(self, instrumentId, quantity):
-        return
+        baseMsg = BaseMessage()
+        baseMsg.type = BaseMessage.NEW_ORDER
+        orderMsg = baseMsg.Extensions[NewOrder.cmd]
+        # order type 1
+        oid = self.genOid()
+        orderMsg.tradInstId = instrumentId
+        orderMsg.clOrdId = '%s' % oid
+        orderMsg.side = -1
+        orderMsg.orderQty = quantity
+        orderMsg.ordType = 1
+        orderMsg.comment = 'API'
+        orderMsg.resend = 0	
+        self.sendFrame(baseMsg.SerializeToString())
+        return oid
         
     # sends a buy limit order over the wire - order type 2, order side 1 
     def limitBuy(self, instrumentId, quantity, price):
+        baseMsg = BaseMessage()
+        baseMsg.type = BaseMessage.NEW_ORDER
+        orderMsg = baseMsg.Extensions[NewOrder.cmd]
+        # order type 1
+        oid = self.genOid()
+        orderMsg.tradInstId = instrumentId
+        orderMsg.clOrdId = '%s' % oid
+        orderMsg.side = 1
+        orderMsg.orderQty = quantity
+        orderMsg.ordType = 2
+        orderMsg.price = price
+        orderMsg.comment = 'API'
+        orderMsg.resend = 0	
+        self.sendFrame(baseMsg.SerializeToString())
+        
         return
         
     # sends a sell limit order over the wire - order type 2, order side -1 
     def limitSell(self, instrumentId, quantity, price):
+        baseMsg = BaseMessage()
+        baseMsg.type = BaseMessage.NEW_ORDER
+        orderMsg = baseMsg.Extensions[NewOrder.cmd]
+        # order type 1
+        oid = self.genOid()
+        orderMsg.tradInstId = instrumentId
+        orderMsg.clOrdId = '%s' % oid
+        orderMsg.side = -1
+        orderMsg.orderQty = quantity
+        orderMsg.ordType = 2
+        orderMsg.price = price
+        orderMsg.comment = 'API'
+        orderMsg.resend = 0	
+        self.sendFrame(baseMsg.SerializeToString())
         return
     
     
@@ -134,8 +184,8 @@ class AqSocket (threading.Thread):
     
     # generates and returns a new order id
     def genOid(self):
-        orderCounter = orderCounter + 1
-        return orderCounter
+        self.orderCounter = self.orderCounter + 1
+        return self.orderCounter
     
     # sends a login message over the wire
     def login(self, username, password, session):

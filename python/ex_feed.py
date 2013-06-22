@@ -4,7 +4,7 @@ from connectivity.message_listener import *
 from connectivity.definitions import *
 
 class MyListener(MessageListener):
-  def loggedin(self):
+  def loggedIn(self):
     print "Logged in!"
     
 
@@ -15,6 +15,6 @@ aqsPrice.connect()
 aqsPrice.login("ustaudinger2", "abcd1234", "PRICE")
 aqsPrice.subscribe(Symbols.GBPNOK, TimeFrames.MINUTES_1)
 aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.MINUTES_1)
-# aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.RAW)
+aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.RAW)
 aqsPrice.subscribe(Symbols.SMICHF, TimeFrames.MINUTES_1)
 aqsPrice.subscribe(Symbols.DAXEUR, TimeFrames.RAW)

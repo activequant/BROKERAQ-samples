@@ -4,7 +4,7 @@ from connectivity.message_listener import *
 from connectivity.definitions import *
 
 class MyListener(MessageListener):
-  def loggedin(self):
+  def loggedIn(self):
     print "Logged in!"
     
 

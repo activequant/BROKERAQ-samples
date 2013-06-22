@@ -1,11 +1,15 @@
 import logging
 import datetime
 from messages_pb2 import *
+from domainmodel.portfolio import * 
+from domainmodel.account import * 
 
 # the message listener class receives all messages from an AQ socket.
 class MessageListener:
 
     logger = None
+    portfolio = Portfolio()
+    account = Account()
     
     def __init__(self):
         logging.basicConfig(format='%(asctime)-15s %(name)s %(message)s')
@@ -21,7 +25,7 @@ class MessageListener:
         self.logger.info('Disconnected.')
         
     def loggedIn(self):
-        self.logger.info('Logged in ')
+        self.logger.info('Logged in.')
     
     def loginRejected(self, message):
         self.logger.info('Login rejected: %s', message)
@@ -60,8 +64,7 @@ class MessageListener:
         
     # all prices arrive in this method. 
     def price(self, instrument, priceMsg):
-        self.logger.info('Price: ', instrument, priceMsg)
-        print instrument, ': ', priceMsg.bidPx[0],' - ', priceMsg.askPx[0]        
+        self.logger.info('Price: %s %s', instrument, priceMsg)
 
     # the server sends out the server time in regular intervals. 
     def serverTime(self, serverTime):
@@ -73,6 +76,12 @@ class MessageListener:
         self.logger.info('=== Account data ===')
         self.logger.info(accountMessage)
         self.logger.info('--------------------')
+        # let's also update the account object. 
+        if len(accountMessage.type)>6: 
+            if accountMessage.type[:4] == 'CASH':
+                self.account.cash = float(accountMessage.value)
+                self.account.accountNumber = accountMessage.type[6:]
+                self.logger.info('Cash value for account >%s< received: %d', self.account.accountNumber, self.account.cash)
         return
     
     # position reports contain an overview of a position       
@@ -80,6 +89,8 @@ class MessageListener:
         self.logger.info('=== Position report ===')
         self.logger.info(positionReport)
         self.logger.info('-----------------------')
+        # let's also update the portfolio. 
+        self.portfolio.setPosition(positionReport.tradInstId, positionReport.entryPrice, positionReport.quantity)
         return
     
     # an execution report contains all reports about executed order instructions. 
