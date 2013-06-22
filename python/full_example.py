@@ -55,7 +55,7 @@ class MyListener(MessageListener):
       return 0
   
   def ohlc(self, ohlc):
-    tempDf = pd.DataFrame({'O': 10, 'H':100,'L':123,'C':123, 'V':0}, index=[12344123123])
+    tempDf = pd.DataFrame({'O': ohlc.open, 'H':ohlc.high,'L':ohlc.low,'C':ohlc.close, 'V':ohlc.volume}, index=[ohlc.timestamp])
     tempDf.index = pd.to_datetime(tempDf.index)
     # let's append this new candle ... 
     self.candles[ohlc.mdiId] = self.candles[ohlc.mdiId].append(tempDf)
