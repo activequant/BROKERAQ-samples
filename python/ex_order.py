@@ -21,10 +21,11 @@ from connectivity.definitions import *
 class MyListener(MessageListener):
   def loggedIn(self):
     print "Logged in!"
-    
+    #aqsOrder.marketSell(Symbols.EURUSD, 100000)    
+    aqsOrder.limitBuy(Symbols.EURUSD, 100000, 1.2)    
 
+aqsOrder = AqSocket(MyListener())
+aqsOrder.host = '78.47.96.150'
+aqsOrder.connect()
+aqsOrder.login('demo', 'demo', "TRADE")
 
-aqsPrice = AqSocket(MyListener())
-aqsPrice.host = '192.168.0.6'
-aqsPrice.connect()
-aqsPrice.login('demo', 'demo', "PRICE")
