@@ -23,7 +23,7 @@ class MyListener(MessageListener):
 
   def __init__(self):
       super(MyListener, self).__init__()
-      self.xmpp = XmppBot(self.jid, self.pwd)
+      self.xmpp = XmppBot(self.jid, self.password)
       if self.xmpp.connect(): 
         self.xmpp.process(block=False)
         print("Done")
