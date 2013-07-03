@@ -15,7 +15,7 @@
 
 import threading
 import socket 
-import struct
+import time
 import logging
 from messages_pb2 import *
 from bincalc import *
@@ -41,37 +41,49 @@ class AqSocket (threading.Thread):
         self.messageListener = mlistener
         
     # connects the socket and starts the read thread. 
-    def connect(self):         
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.connect((self.host, self.port))
-        self.logger.info('socket connected')
-        if self.messageListener != None:
-            self.messageListener.connected()
+    def connect(self):
         self.start()
         
     # read loop
     def run(self):
-        self.logger.info('Spawned new thread in read mode ...')        
-        lengthBytes = []                    
-        while 1:            
-            data = self.sock.recv(1)
-            if len(data) == 0:
-                if self.messageListener!=None:
-                    self.messageListener.disconnected()
-                # we'll also try to reconnect. 
-                
-                return
-            lengthBytes.append(data)
-            intVal = ord(data)
-            if intVal < 128:
-                length = varintToNumber(bytearray(lengthBytes))
-                data = self.sock.recv(length)
-                lengthBytes = []
-                self.decodeBaseMessage(data)
+        while 1: 
+            self.sock = None
+            # we'll try to reconnect as often as possible. 
+            try:
+                self.logger.info('Trying to connect socket.')        
+                self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.sock.connect((self.host, self.port))
+                self.logger.info('socket connected')
+                if self.messageListener != None:
+                    self.messageListener.connected()
+                lengthBytes = []                    
+                while 1:            
+                    data = self.sock.recv(1)
+                    if len(data) == 0:
+                        if self.messageListener!=None:
+                            self.messageListener.disconnected()
+                            self.sock = None
+                        break
+                    lengthBytes.append(data)
+                    intVal = ord(data)
+                    if intVal < 128:
+                        length = varintToNumber(bytearray(lengthBytes))
+                        data = self.sock.recv(length)
+                        lengthBytes = []
+                        self.decodeBaseMessage(data)
+            except Exception as msg:
+                print 'Error while working with socket:', msg
+                if self.sock is not None: 
+                    self.sock.close()
+                self.sock = None
+            time.sleep(5)
     
     # method to send a base message. 
     # gets the Varint32 encoded length as bytes, sends these and then sends the base message
     def sendFrame(self, baseMsg):
+        if self.sock is None: 
+            self.logger.warn('Cannot send message as socket is not connected.')
+            
         self.logger.debug('sending frame to server.')
         b = numberToVarint(len(baseMsg))
         # send the frame
