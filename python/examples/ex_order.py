@@ -13,18 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from connectivity.messages_pb2 import *
-from connectivity.aq_socket import *
-from connectivity.message_listener import *
-from connectivity.definitions import *
+import os
+import sys
+
+path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if not path in sys.path:
+    sys.path.insert(1, path)
+del path
+
+from aq.connectivity.messages_pb2 import *
+from aq.connectivity.aq_socket import *
+from aq.connectivity.message_listener import *
+from aq.connectivity.definitions import *
 
 class MyListener(MessageListener):
   def loggedIn(self):
     print "Logged in!"
+    #aqsOrder.marketSell(Symbols.EURUSD, 100000)    
+    aqsOrder.limitBuy(Symbols.EURUSD, 100000, 1.2)    
+  def connected(self):
+    aqsOrder.login('demo', 'demo', "TRADE")
     
 
+aqsOrder = AqSocket(MyListener())
+aqsOrder.host = '78.47.96.150'
+aqsOrder.connect()
 
-aqsPrice = AqSocket(MyListener())
-aqsPrice.host = '192.168.0.6'
-aqsPrice.connect()
-aqsPrice.login('demo', 'demo', "PRICE")

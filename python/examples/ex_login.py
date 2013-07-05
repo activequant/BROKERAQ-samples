@@ -13,7 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-class Account: 
-    cash = None
-    accountNumber = None
+import sys
+import os 
+
+path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if not path in sys.path:
+    sys.path.insert(1, path)
+del path
+
+from aq.connectivity.messages_pb2 import *
+from aq.connectivity.aq_socket import *
+from aq.connectivity.message_listener import *
+from aq.connectivity.definitions import *
+
+class MyListener(MessageListener):
+    def loggedIn(self):
+      print "Logged in!"
     
+    def connected(self):
+      aqsPrice.login('demo', 'demo', "PRICE")
+      
+    
+
+
+aqsPrice = AqSocket(MyListener())
+aqsPrice.host = '78.47.96.150'
+aqsPrice.connect()

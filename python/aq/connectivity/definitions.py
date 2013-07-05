@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 # This file contains various definitions 
 # here we define the most common time frames. 
 class TimeFrames:
@@ -24,7 +23,7 @@ class TimeFrames:
 	HOURS_1 = "HOURS_1"
 	EOD = "EOD"
 	
-# Here we define the most common symbols from SwissQuote.  
+# Here we define the most common symbols, dealable on ACM/SwissQuote.  
 class Symbols:
 	AUDCAD = "AUDCAD"
 	AUDCHF = "AUDCHF"
@@ -94,8 +93,3 @@ class Symbols:
 	XAUUSD = "XAUUSD"
 	XPDUSD = "XPDUSD"
 	XPTUSD = "XPTUSD"
-
-
-
-	
-	

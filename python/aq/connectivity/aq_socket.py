@@ -21,6 +21,8 @@ from messages_pb2 import *
 from bincalc import *
 from message_listener import *
            
+
+# The AqSocket class is responsible for managing the connection to an AQ endpoint and also to send messages to and from it. 
 class AqSocket (threading.Thread):
 
     sock = None 
@@ -29,8 +31,10 @@ class AqSocket (threading.Thread):
     port = 59999   
     orderCounter = 0
     logger = None
+    # set this flag to a value greater than 0 to enable automatic reconnects. 
+    # The set value specifies the time between reconnect attempts after a connection has been lost. 
+    autoReconnectTime = 5
 
-    
     # plain constructor. 
     def __init__(self, mlistener):
         logging.basicConfig(format='%(asctime)-15s %(name)s %(message)s')
@@ -76,7 +80,10 @@ class AqSocket (threading.Thread):
                 if self.sock is not None: 
                     self.sock.close()
                 self.sock = None
-            time.sleep(5)
+            if self.autoReconnectTime>0:
+                time.sleep(self.autoReconnectTime)
+            else: 
+                break
     
     # method to send a base message. 
     # gets the Varint32 encoded length as bytes, sends these and then sends the base message

@@ -1,29 +1,57 @@
+# python
 from datetime import date, timedelta
+import os
+import sys
 
-from connectivity.aq_socket import AqSocket
-from connectivity.message_listener import MessageListener
-from connectivity.definitions import Symbols, TimeFrames
-from functions import onlinearchive
+path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if not path in sys.path:
+    sys.path.insert(1, path)
+del path
 
+# aq
+from aq.connectivity.aq_socket import AqSocket
+from aq.connectivity.message_listener import MessageListener
+from aq.connectivity.definitions import Symbols, TimeFrames
+from aq.functions import onlinearchive
+from aq.functions.xmppbot import XmppBot, BaseXMPPListener
+
+# 3rd party
 import pandas as pd
 
-from xmppbot import XmppBot
+
+class XMPPMessageListener(BaseXMPPListener):
+    myListener = None 
+    
+    def __init__(self, myListener):
+        self.myListener = myListener 
+    
+    def message(self, msg):
+        print 'XMPP Message received: ', msg
+        if msg['body'] == 'status':
+            msg.reply("Current %s" %self.myListener.currentDirections).send()
+	else:
+	    msg.reply('All fine.').send()
+
 
 # Moving average cross over notifier. 
 # author: GhostRider
 # Listener class. 
 class MyListener(MessageListener):
   
+  currentDirections = {}
   candles = {}
   xmpp = []
+  aqsPrice = None
+  xmppListener = None
 
-  jid = ''
+  jid = '@jabber.org'
   password = ''
   targetjid = ''
 
   def __init__(self):
       super(MyListener, self).__init__()
-      self.xmpp = XmppBot(self.jid, self.password)
+      self.xmppListener = XMPPMessageListener(self)
+      self.xmpp = XmppBot(self.jid, self.password, self.xmppListener)
       if self.xmpp.connect(): 
         self.xmpp.process(block=False)
         print("Done")
@@ -31,11 +59,21 @@ class MyListener(MessageListener):
         print("Unable to connect.")
       return
   
+  def setAqsPrice(self, aqsPrice):
+      self.aqsPrice = aqsPrice
+  
+  def serverTime(self, serverTime):
+      return
+    
+  def connected(self):
+      self.aqsPrice.login(brokeraqUid, brokeraqPwd, "PRICE")
+
   
   def init(self, instrumentId):      
       # let's fetch ten days of hourly history. 
       endDate = date.today().strftime('%Y%m%d')
       startDate = (date.today()-timedelta(days=10)).strftime('%Y%m%d')
+      
       self.candles[instrumentId] = onlinearchive.history(instrumentId,'HOURS_1',startDate, endDate)          
       print 'Fetched ', len(self.candles[instrumentId]), ' candles from history archive.'      
       return
@@ -43,18 +81,38 @@ class MyListener(MessageListener):
   def loggedIn(self):
     print "Logged in!"
     self.xmpp.outgoingQueue.put([self.targetjid, 'Bot is up and running'])
+    
+    self.init(Symbols.EURUSD)
+    self.aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.HOURS_1)
+    
+    self.init(Symbols.OILUSD)
+    self.aqsPrice.subscribe(Symbols.OILUSD, TimeFrames.HOURS_1)
+    
+    self.init(Symbols.EURCHF)
+    self.aqsPrice.subscribe(Symbols.EURCHF, TimeFrames.HOURS_1)
+    
+    self.init(Symbols.USDCHF)
+    self.aqsPrice.subscribe(Symbols.USDCHF, TimeFrames.HOURS_1)
+    
+    self.init(Symbols.XAGUSD)
+    self.aqsPrice.subscribe(Symbols.XAGUSD, TimeFrames.HOURS_1)
+
+
 
   # checks if a series crossed. 
   def crossing(self, series1, series2):
       if len(series1)==len(series2) and len(series1) > 1:
           length = len(series1)
           if series1[length-2] > series2[length-2] and series1[length-1] < series2[length-1]:
+              print 'SHORT'
               return -1
           if series1[length-2] < series2[length-2] and series1[length-1] > series2[length-1]:
+              print 'LONG'
               return 1                
       return 0
   
   def ohlc(self, ohlc):
+    print 'ohlc received for ', ohlc.mdiId,': ', ohlc.close
     tempDf = pd.DataFrame({'O': ohlc.open, 'H':ohlc.high,'L':ohlc.low,'C':ohlc.close, 'V':ohlc.volume}, index=[ohlc.timestamp])
     tempDf.index = pd.to_datetime(tempDf.index)
     # let's append this new candle ... 
@@ -62,6 +120,14 @@ class MyListener(MessageListener):
     # now, let's calculate the ewma values. 
     ewma20 = pd.ewma(self.candles[ohlc.mdiId]['C'], span=20)
     ewma50 = pd.ewma(self.candles[ohlc.mdiId]['C'], span=50)
+    
+    lastEma20Val = ewma20[len(ewma20)-1]
+    lastEma50Val = ewma50[len(ewma50)-1]
+    print "EMAs: ", lastEma20Val, " - ", lastEma50Val
+    if lastEma20Val > lastEma50Val:
+        self.currentDirections[ohlc.mdiId] = 'LONG'
+    else:
+        self.currentDirections[ohlc.mdiId] = 'SHORT'
     if self.crossing(ewma20, ewma50) > 0:
         # let's trigger some action ... 
         self.xmpp.outgoingQueue.put([self.targetjid, 'LONG '+ohlc.mdiId])
@@ -75,24 +141,12 @@ class MyListener(MessageListener):
     
 ############### MAIN CODE START     
 # let's create the listener. 
+
+brokeraqUid = 'demo'
+brokeraqPwd = 'demo'
+
 listener = MyListener()
 aqsPrice = AqSocket(listener)
+listener.setAqsPrice(aqsPrice)
 aqsPrice.host = '78.47.96.150'
 aqsPrice.connect()
-aqsPrice.login(brokeraqUid, brokeraqPwd, "PRICE")
-
-listener.init(Symbols.EURUSD)
-aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.HOURS_1)
-
-listener.init(Symbols.OILUSD)
-aqsPrice.subscribe(Symbols.OILUSD, TimeFrames.HOURS_1)
-
-listener.init(Symbols.EURCHF)
-aqsPrice.subscribe(Symbols.EURCHF, TimeFrames.HOURS_1)
-
-listener.init(Symbols.USDCHF)
-aqsPrice.subscribe(Symbols.USDCHF, TimeFrames.HOURS_1)
-
-listener.init(Symbols.XAGUSD)
-aqsPrice.subscribe(Symbols.XAGUSD, TimeFrames.HOURS_1)
-

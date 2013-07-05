@@ -16,8 +16,8 @@
 import logging
 import datetime
 from messages_pb2 import *
-from domainmodel.portfolio import * 
-from domainmodel.account import * 
+from aq.domainmodel.portfolio import * 
+from aq.domainmodel.account import * 
 
 # the message listener class receives all messages from an AQ socket.
 class MessageListener(object):
