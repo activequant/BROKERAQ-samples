@@ -8,6 +8,8 @@ if not path in sys.path:
     sys.path.insert(1, path)
 del path
 
+
+
 # aq
 from aq.connectivity.aq_socket import AqSocket
 from aq.connectivity.message_listener import MessageListener
