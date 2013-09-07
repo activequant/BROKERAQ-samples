@@ -16,15 +16,11 @@
 import sys
 import os 
 
-path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-if not path in sys.path:
-    sys.path.insert(1, path)
-del path
 
-from aq.connectivity.messages_pb2 import *
-from aq.connectivity.aq_socket import *
-from aq.connectivity.message_listener import *
-from aq.connectivity.definitions import *
+from aq.stream.messages_pb2 import *
+from aq.stream.aq_socket import *
+from aq.stream.message_listener import *
+from aq.stream.definitions import *
 
 class MyListener(MessageListener):
     def loggedIn(self):
