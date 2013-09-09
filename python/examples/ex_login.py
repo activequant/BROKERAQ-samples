@@ -13,10 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-import os 
-
-
 from aq.stream.messages_pb2 import *
 from aq.stream.aq_socket import *
 from aq.stream.message_listener import *
