@@ -23,7 +23,7 @@ class MyListener(MessageListener):
       print "Logged in!"
     
     def connected(self):
-      self.aqSocket.login('ustaudinger2', 'abcd1234', "PRICE")
+      self.aqSocket.login('demo', 'demo', "PRICE")
       
     
 
