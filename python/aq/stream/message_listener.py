@@ -20,11 +20,13 @@ from aq.domainmodel.portfolio import *
 from aq.domainmodel.account import * 
 
 # the message listener class receives all messages from an AQ socket.
+# extend this class to implement your own event handlers. 
 class MessageListener(object):
 
     logger = None
     portfolio = Portfolio()
     account = Account()
+    aqSocket = None
     
     def __init__(self):
         logging.basicConfig(format='%(asctime)-15s %(name)s %(message)s')

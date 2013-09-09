@@ -23,11 +23,16 @@ class MyListener(MessageListener):
       print "Logged in!"
     
     def connected(self):
-      aqsPrice.login('demo', 'demo', "PRICE")
+      self.aqSocket.login('ustaudinger2', 'abcd1234', "PRICE")
       
     
 
 
-aqsPrice = AqSocket(MyListener())
-aqsPrice.host = '78.47.96.150'
-aqsPrice.connect()
+# let's add the main. 
+def main(args):
+    aqsPrice = AqSocket(MyListener())            
+    aqsPrice.host = '78.47.96.150'    
+    aqsPrice.connect()
+
+if __name__ == '__main__':
+  main(sys.argv)

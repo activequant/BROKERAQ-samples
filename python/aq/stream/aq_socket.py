@@ -42,15 +42,19 @@ class AqSocket (threading.Thread):
         self.logger.setLevel(logging.INFO)
         self.logger.info('Initializing AQSocket.')
         threading.Thread.__init__(self)
+        # let's store the reference to the message listener. 
         self.messageListener = mlistener
-        
+        # let's also set a link back to the message listener. 
+        mlistener.aqSocket = self
+        self.kill_received = False
+            
     # connects the socket and starts the read thread. 
     def connect(self):
         self.start()
         
     # read loop
     def run(self):
-        while 1: 
+        while not self.kill_received: 
             self.sock = None
             # we'll try to reconnect as often as possible. 
             try:
@@ -60,8 +64,9 @@ class AqSocket (threading.Thread):
                 self.logger.info('socket connected')
                 if self.messageListener != None:
                     self.messageListener.connected()
-                lengthBytes = []                    
-                while 1:            
+                lengthBytes = [] 
+                # check if we received a kill signal.                    
+                while not self.kill_received:            
                     data = self.sock.recv(1)
                     if len(data) == 0:
                         if self.messageListener!=None:
@@ -80,7 +85,8 @@ class AqSocket (threading.Thread):
                 if self.sock is not None: 
                     self.sock.close()
                 self.sock = None
-            if self.autoReconnectTime>0:
+            # let's check if we should reconnect
+            if self.autoReconnectTime>0 and not self.kill_received:
                 time.sleep(self.autoReconnectTime)
             else: 
                 break
