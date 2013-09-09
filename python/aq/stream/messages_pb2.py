@@ -11,7 +11,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = descriptor.FileDescriptor(
   name='messages.proto',
   package='com.activequant.messages',
-  serialized_pb='\n\x0emessages.proto\x12\x18\x63om.activequant.messages\"\xc3\x05\n\x0b\x42\x61seMessage\x12?\n\x04type\x18\x01 \x02(\x0e\x32\x31.com.activequant.messages.BaseMessage.CommandType\"\xe8\x04\n\x0b\x43ommandType\x12\x0b\n\x07VERSION\x10\x01\x12\t\n\x05LOGIN\x10\x02\x12\x0f\n\x0bSERVER_TIME\x10\x03\x12\x12\n\x0eLOGIN_RESPONSE\x10\x04\x12\x07\n\x03MDS\x10\x05\x12\r\n\tACCT_DATA\x10\x06\x12\x13\n\x0fPOSITION_REPORT\x10\x07\x12\x14\n\x10\x45XECUTION_REPORT\x10\x08\x12\x10\n\x0cORD_CNCL_REQ\x10\t\x12\x10\n\x0cORD_CNCL_REJ\x10\n\x12\x15\n\x11ORD_CNCL_REPL_REQ\x10\x0b\x12\r\n\tNEW_ORDER\x10\x0c\x12\x11\n\rORD_SUBMITTED\x10\r\x12\x0e\n\nORD_ACCPTD\x10\x0e\x12\x11\n\rORD_CANCELLED\x10\x0f\x12\x0f\n\x0bORD_UPDATED\x10\x10\x12\x13\n\x0fSECURITY_STATUS\x10\x11\x12\x0b\n\x07ORD_REJ\x10\x12\x12\x18\n\x14ORD_UPDATE_SUBMITTED\x10\x13\x12\x18\n\x14ORD_CANCEL_SUBMITTED\x10\x14\x12\x14\n\x10ORD_UPD_REJECTED\x10\x15\x12\x15\n\x11\x45XECUTION_REPORT2\x10\x16\x12\x0c\n\x08\x43UST_CMD\x10\x17\x12\x0e\n\nINFO_EVENT\x10\x18\x12\x08\n\x04OHLC\x10\x19\x12\x08\n\x04TICK\x10\x1a\x12\x0c\n\x08VALUESET\x10\x1b\x12\x10\n\x0cMD_SUBSCRIBE\x10\x1c\x12\x19\n\x15MD_SUBSCRIBE_RESPONSE\x10\x1d\x12\x12\n\x0eMD_UNSUBSCRIBE\x10\x1e\x12\x1b\n\x17MD_UNSUBSCRIBE_RESPONSE\x10\x1f\x12\x10\n\x0cHIST_REQUEST\x10 \x12\x15\n\x11HIST_OHLCRESPONSE\x10 *\x08\x08\x64\x10\x80\x80\x80\x80\x02\"\x93\x01\n\x05Login\x12\x0e\n\x06userId\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\x12\x13\n\x0bsessionType\x18\x03 \x02(\t2S\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x64 \x02(\x0b\x32\x1f.com.activequant.messages.Login\"y\n\nServerTime\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x32X\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x65 \x02(\x0b\x32$.com.activequant.messages.ServerTime\"|\n\rLoginResponse\x12\x0e\n\x06status\x18\x01 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x66 \x02(\x0b\x32\'.com.activequant.messages.LoginResponse\"\xe2\x01\n\x12MarketDataSnapshot\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\r\n\x05\x62idPx\x18\x02 \x03(\x01\x12\r\n\x05\x61skPx\x18\x03 \x03(\x01\x12\x0c\n\x04\x62idQ\x18\x04 \x03(\x01\x12\x0c\n\x04\x61skQ\x18\x05 \x03(\x01\x12\r\n\x05mdiId\x18\x06 \x02(\t\x12\x0e\n\x06resend\x18\x07 \x01(\x08\x32`\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18g \x02(\x0b\x32,.com.activequant.messages.MarketDataSnapshot\"\x93\x01\n\x12\x41\x63\x63ountDataMessage\x12\x0c\n\x04type\x18\x01 \x02(\t\x12\r\n\x05value\x18\x02 \x02(\t2`\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18h \x02(\x0b\x32,.com.activequant.messages.AccountDataMessage\"\xba\x01\n\x0ePositionReport\x12\x10\n\x08openDate\x18\x01 \x02(\t\x12\x12\n\nentryPrice\x18\x02 \x02(\x01\x12\x10\n\x08quantity\x18\x03 \x02(\x01\x12\x12\n\ntradInstId\x18\x04 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18i \x02(\x0b\x32(.com.activequant.messages.PositionReport\"\xad\x03\n\x0f\x45xecutionReport\x12\x0f\n\x07\x63lOrdId\x18\x01 \x02(\t\x12\x0e\n\x06\x65xecId\x18\x02 \x02(\t\x12\x0c\n\x04side\x18\x03 \x02(\x05\x12\x10\n\x08\x63urrency\x18\x04 \x02(\t\x12\x10\n\x08orderQty\x18\x05 \x02(\x01\x12\r\n\x05price\x18\x06 \x02(\x01\x12\x12\n\ntradInstId\x18\x07 \x02(\t\x12\x14\n\x0ctransactTime\x18\x08 \x02(\t\x12\x0f\n\x07orderId\x18\t \x02(\t\x12\x10\n\x08\x65xecType\x18\n \x02(\x05\x12\x11\n\tordStatus\x18\x0b \x02(\x05\x12\x0e\n\x06\x63umQty\x18\x0c \x02(\x01\x12\x11\n\tleavesQty\x18\r \x02(\x01\x12\r\n\x05\x61vgPx\x18\x0e \x02(\x01\x12\x0f\n\x07ordType\x18\x10 \x02(\t\x12\x0c\n\x04text\x18\x11 \x01(\t\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t\x12\x17\n\x0fmassStatusReqId\x18\x14 \x01(\t2]\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18j \x02(\x0b\x32).com.activequant.messages.ExecutionReport\"\xe1\x01\n\x12OrderCancelRequest\x12\x13\n\x0borgCldOrdId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\ntradInstId\x18\x03 \x02(\t\x12\x0c\n\x04side\x18\x04 \x02(\x05\x12\x10\n\x08orderQty\x18\x06 \x02(\x01\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t2`\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18k \x02(\x0b\x32,.com.activequant.messages.OrderCancelRequest\"\x8f\x02\n\x11OrderCancelReject\x12\x12\n\ntradInstId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\norgClOrdId\x18\x03 \x02(\t\x12\x11\n\tordStatus\x18\x04 \x02(\t\x12\x18\n\x10\x43xlRejResponseTo\x18\x05 \x02(\t\x12\x14\n\x0c\x63lxRejReason\x18\x06 \x01(\t\x12\x0c\n\x04text\x18\x07 \x01(\t\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t2_\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18l \x02(\x0b\x32+.com.activequant.messages.OrderCancelReject\"\xb9\x02\n\x19OrderCancelReplaceRequest\x12\x12\n\ntradInstId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\norgClOrdId\x18\x03 \x02(\t\x12\x0c\n\x04side\x18\x04 \x02(\x05\x12\x14\n\x0ctransactTime\x18\x05 \x02(\t\x12\x10\n\x08orderQty\x18\x06 \x02(\x01\x12\x0f\n\x07ordType\x18\x07 \x02(\x05\x12\r\n\x05price\x18\x08 \x02(\x01\x12\x13\n\x0btimeInForce\x18\t \x02(\x05\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t2g\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18m \x02(\x0b\x32\x33.com.activequant.messages.OrderCancelReplaceRequest\"\xa7\x02\n\x08NewOrder\x12\x12\n\ntradInstId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\norgClOrdId\x18\x03 \x01(\t\x12\x0c\n\x04side\x18\x04 \x02(\x05\x12\x14\n\x0ctransactTime\x18\x05 \x01(\t\x12\x10\n\x08orderQty\x18\x06 \x02(\x01\x12\x0f\n\x07ordType\x18\x07 \x02(\x05\x12\r\n\x05price\x18\x08 \x01(\x01\x12\x13\n\x0btimeInForce\x18\t \x01(\x05\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t\x12\x0e\n\x06resend\x18\x14 \x02(\x05\x32V\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18n \x02(\x0b\x32\".com.activequant.messages.NewOrder\"\x7f\n\x0eOrderSubmitted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18o \x02(\x0b\x32(.com.activequant.messages.OrderSubmitted\"}\n\rOrderAccepted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18p \x02(\x0b\x32\'.com.activequant.messages.OrderAccepted\"\x7f\n\x0eOrderCancelled\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18q \x02(\x0b\x32(.com.activequant.messages.OrderCancelled\"{\n\x0cOrderUpdated\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2Z\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18r \x02(\x0b\x32&.com.activequant.messages.OrderUpdated\"\x8d\x01\n\x0eSecurityStatus\x12\r\n\x05tdiId\x18\x02 \x02(\t\x12\x0e\n\x06status\x18\x03 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18s \x02(\x0b\x32(.com.activequant.messages.SecurityStatus\"\x8d\x01\n\rOrderRejected\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x0e\n\x06reason\x18\x03 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18t \x02(\x0b\x32\'.com.activequant.messages.OrderRejected\"\x8b\x01\n\x14OrderUpdateSubmitted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2b\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18u \x02(\x0b\x32..com.activequant.messages.OrderUpdateSubmitted\"\x8b\x01\n\x14OrderCancelSubmitted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2b\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18v \x02(\x0b\x32..com.activequant.messages.OrderCancelSubmitted\"\x99\x01\n\x13OrderUpdateRejected\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x0e\n\x06reason\x18\x03 \x02(\t2a\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18w \x02(\x0b\x32-.com.activequant.messages.OrderUpdateRejected\"\x88\x02\n\x10\x45xecutionReport2\x12\x0f\n\x07\x63lOrdId\x18\x01 \x02(\t\x12\x0e\n\x06\x65xecId\x18\x02 \x02(\t\x12\x0c\n\x04side\x18\x03 \x02(\t\x12\r\n\x05price\x18\x06 \x02(\x01\x12\r\n\x05tdiId\x18\x07 \x02(\t\x12\x14\n\x0ctransactTime\x18\x08 \x02(\x03\x12\x0b\n\x03qty\x18\r \x02(\x01\x12\x0e\n\x06resend\x18\x0e \x02(\x05\x12\x14\n\x0cquantityLeft\x18\x0f \x02(\x01\x32^\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18x \x02(\x0b\x32*.com.activequant.messages.ExecutionReport2\"}\n\rCustomCommand\x12\x0f\n\x07\x63ommand\x18\x01 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18y \x02(\x0b\x32\'.com.activequant.messages.CustomCommand\"\x88\x01\n\tInfoEvent\x12\x0f\n\x07message\x18\x01 \x02(\t\x12\x11\n\ttimestamp\x18\x02 \x02(\x03\x32W\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18z \x02(\x0b\x32#.com.activequant.messages.InfoEvent\"\xc4\x01\n\x04OHLC\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x0c\n\x04open\x18\x03 \x02(\x01\x12\x0c\n\x04high\x18\x04 \x02(\x01\x12\x0b\n\x03low\x18\x05 \x02(\x01\x12\r\n\x05\x63lose\x18\x06 \x02(\x01\x12\x0e\n\x06volume\x18\x07 \x01(\x01\x32R\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18{ \x02(\x0b\x32\x1e.com.activequant.messages.OHLC\"\xb4\x01\n\x04Tick\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\r\n\x05price\x18\x03 \x02(\x01\x12\x10\n\x08quantity\x18\x04 \x02(\x01\x12\x15\n\rtickDirection\x18\x05 \x02(\x05\x32R\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18| \x02(\x0b\x32\x1e.com.activequant.messages.Tick\"\xad\x01\n\x08ValueSet\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\x0c\n\x04type\x18\x02 \x02(\t\x12\n\n\x02id\x18\x03 \x02(\t\x12\r\n\x05\x66ield\x18\x04 \x02(\t\x12\r\n\x05value\x18\x05 \x02(\t2V\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18} \x02(\x0b\x32\".com.activequant.messages.ValueSet\"\x8a\x01\n\x0bMDSubscribe\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x11\n\ttimeframe\x18\x03 \x02(\t2Y\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18~ \x02(\x0b\x32%.com.activequant.messages.MDSubscribe\"\x8e\x01\n\rMDUnsubscribe\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x11\n\ttimeframe\x18\x03 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x7f \x02(\x0b\x32\'.com.activequant.messages.MDUnsubscribe\"\x97\x01\n\x13MDSubscribeResponse\x12\x0e\n\x06status\x18\x02 \x02(\t\x12\x0c\n\x04\x66lag\x18\x03 \x02(\x05\x32\x62\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x80\x01 \x02(\x0b\x32-.com.activequant.messages.MDSubscribeResponse\"\x99\x01\n\x15MDUnsubscribeResponse\x12\x0e\n\x06status\x18\x02 \x02(\t\x12\x0c\n\x04\x66lag\x18\x03 \x02(\x05\x32\x62\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x81\x01 \x02(\x0b\x32-.com.activequant.messages.MDSubscribeResponse\"\xb1\x01\n\x0bHistRequest\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x12\n\nstartDate8\x18\x03 \x02(\x05\x12\x10\n\x08\x65ndDate8\x18\x04 \x02(\x05\x12\x11\n\ttimeframe\x18\x05 \x02(\t2Z\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x82\x01 \x02(\x0b\x32%.com.activequant.messages.HistRequest\"\x95\x02\n\x10HistOhlcResponse\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x11\n\ttimestamp\x18\x03 \x03(\x03\x12\x0c\n\x04open\x18\x04 \x03(\x01\x12\x0c\n\x04high\x18\x05 \x03(\x01\x12\x0b\n\x03low\x18\x06 \x03(\x01\x12\r\n\x05\x63lose\x18\x07 \x03(\x01\x12\x0e\n\x06volume\x18\x08 \x03(\x01\x12\r\n\x05\x66inal\x18\t \x02(\x05\x12\x11\n\terrorCode\x18\n \x01(\x05\x12\x14\n\x0c\x65rrorMessage\x18\x0b \x01(\t2_\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x83\x01 \x02(\x0b\x32*.com.activequant.messages.HistOhlcResponseB&\n\x18\x63om.activequant.messagesB\nAQMessages')
+  serialized_pb='\n\x0emessages.proto\x12\x18\x63om.activequant.messages\"\xc3\x05\n\x0b\x42\x61seMessage\x12?\n\x04type\x18\x01 \x02(\x0e\x32\x31.com.activequant.messages.BaseMessage.CommandType\"\xe8\x04\n\x0b\x43ommandType\x12\x0b\n\x07VERSION\x10\x01\x12\t\n\x05LOGIN\x10\x02\x12\x0f\n\x0bSERVER_TIME\x10\x03\x12\x12\n\x0eLOGIN_RESPONSE\x10\x04\x12\x07\n\x03MDS\x10\x05\x12\r\n\tACCT_DATA\x10\x06\x12\x13\n\x0fPOSITION_REPORT\x10\x07\x12\x14\n\x10\x45XECUTION_REPORT\x10\x08\x12\x10\n\x0cORD_CNCL_REQ\x10\t\x12\x10\n\x0cORD_CNCL_REJ\x10\n\x12\x15\n\x11ORD_CNCL_REPL_REQ\x10\x0b\x12\r\n\tNEW_ORDER\x10\x0c\x12\x11\n\rORD_SUBMITTED\x10\r\x12\x0e\n\nORD_ACCPTD\x10\x0e\x12\x11\n\rORD_CANCELLED\x10\x0f\x12\x0f\n\x0bORD_UPDATED\x10\x10\x12\x13\n\x0fSECURITY_STATUS\x10\x11\x12\x0b\n\x07ORD_REJ\x10\x12\x12\x18\n\x14ORD_UPDATE_SUBMITTED\x10\x13\x12\x18\n\x14ORD_CANCEL_SUBMITTED\x10\x14\x12\x14\n\x10ORD_UPD_REJECTED\x10\x15\x12\x15\n\x11\x45XECUTION_REPORT2\x10\x16\x12\x0c\n\x08\x43UST_CMD\x10\x17\x12\x0e\n\nINFO_EVENT\x10\x18\x12\x08\n\x04OHLC\x10\x19\x12\x08\n\x04TICK\x10\x1a\x12\x0c\n\x08VALUESET\x10\x1b\x12\x10\n\x0cMD_SUBSCRIBE\x10\x1c\x12\x19\n\x15MD_SUBSCRIBE_RESPONSE\x10\x1d\x12\x12\n\x0eMD_UNSUBSCRIBE\x10\x1e\x12\x1b\n\x17MD_UNSUBSCRIBE_RESPONSE\x10\x1f\x12\x10\n\x0cHIST_REQUEST\x10 \x12\x15\n\x11HIST_OHLCRESPONSE\x10 *\x08\x08\x64\x10\x80\x80\x80\x80\x02\"\x93\x01\n\x05Login\x12\x0e\n\x06userId\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\x12\x13\n\x0bsessionType\x18\x03 \x02(\t2S\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x64 \x02(\x0b\x32\x1f.com.activequant.messages.Login\"y\n\nServerTime\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x32X\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x65 \x02(\x0b\x32$.com.activequant.messages.ServerTime\"|\n\rLoginResponse\x12\x0e\n\x06status\x18\x01 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x66 \x02(\x0b\x32\'.com.activequant.messages.LoginResponse\"\xe2\x01\n\x12MarketDataSnapshot\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\r\n\x05\x62idPx\x18\x02 \x03(\x01\x12\r\n\x05\x61skPx\x18\x03 \x03(\x01\x12\x0c\n\x04\x62idQ\x18\x04 \x03(\x01\x12\x0c\n\x04\x61skQ\x18\x05 \x03(\x01\x12\r\n\x05mdiId\x18\x06 \x02(\t\x12\x0e\n\x06resend\x18\x07 \x01(\x08\x32`\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18g \x02(\x0b\x32,.com.activequant.messages.MarketDataSnapshot\"\x93\x01\n\x12\x41\x63\x63ountDataMessage\x12\x0c\n\x04type\x18\x01 \x02(\t\x12\r\n\x05value\x18\x02 \x02(\t2`\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18h \x02(\x0b\x32,.com.activequant.messages.AccountDataMessage\"\xba\x01\n\x0ePositionReport\x12\x10\n\x08openDate\x18\x01 \x02(\t\x12\x12\n\nentryPrice\x18\x02 \x02(\x01\x12\x10\n\x08quantity\x18\x03 \x02(\x01\x12\x12\n\ntradInstId\x18\x04 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18i \x02(\x0b\x32(.com.activequant.messages.PositionReport\"\xad\x03\n\x0f\x45xecutionReport\x12\x0f\n\x07\x63lOrdId\x18\x01 \x02(\t\x12\x0e\n\x06\x65xecId\x18\x02 \x02(\t\x12\x0c\n\x04side\x18\x03 \x02(\x05\x12\x10\n\x08\x63urrency\x18\x04 \x02(\t\x12\x10\n\x08orderQty\x18\x05 \x02(\x01\x12\r\n\x05price\x18\x06 \x02(\x01\x12\x12\n\ntradInstId\x18\x07 \x02(\t\x12\x14\n\x0ctransactTime\x18\x08 \x02(\t\x12\x0f\n\x07orderId\x18\t \x02(\t\x12\x10\n\x08\x65xecType\x18\n \x02(\x05\x12\x11\n\tordStatus\x18\x0b \x02(\x05\x12\x0e\n\x06\x63umQty\x18\x0c \x02(\x01\x12\x11\n\tleavesQty\x18\r \x02(\x01\x12\r\n\x05\x61vgPx\x18\x0e \x02(\x01\x12\x0f\n\x07ordType\x18\x10 \x02(\t\x12\x0c\n\x04text\x18\x11 \x01(\t\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t\x12\x17\n\x0fmassStatusReqId\x18\x14 \x01(\t2]\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18j \x02(\x0b\x32).com.activequant.messages.ExecutionReport\"\xe1\x01\n\x12OrderCancelRequest\x12\x13\n\x0borgCldOrdId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\ntradInstId\x18\x03 \x02(\t\x12\x0c\n\x04side\x18\x04 \x02(\x05\x12\x10\n\x08orderQty\x18\x06 \x02(\x01\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t2`\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18k \x02(\x0b\x32,.com.activequant.messages.OrderCancelRequest\"\x8f\x02\n\x11OrderCancelReject\x12\x12\n\ntradInstId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\norgClOrdId\x18\x03 \x02(\t\x12\x11\n\tordStatus\x18\x04 \x02(\t\x12\x18\n\x10\x43xlRejResponseTo\x18\x05 \x02(\t\x12\x14\n\x0c\x63lxRejReason\x18\x06 \x01(\t\x12\x0c\n\x04text\x18\x07 \x01(\t\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t2_\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18l \x02(\x0b\x32+.com.activequant.messages.OrderCancelReject\"\xb9\x02\n\x19OrderCancelReplaceRequest\x12\x12\n\ntradInstId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\norgClOrdId\x18\x03 \x02(\t\x12\x0c\n\x04side\x18\x04 \x02(\x05\x12\x14\n\x0ctransactTime\x18\x05 \x02(\t\x12\x10\n\x08orderQty\x18\x06 \x02(\x01\x12\x0f\n\x07ordType\x18\x07 \x02(\x05\x12\r\n\x05price\x18\x08 \x02(\x01\x12\x13\n\x0btimeInForce\x18\t \x02(\x05\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t2g\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18m \x02(\x0b\x32\x33.com.activequant.messages.OrderCancelReplaceRequest\"\xa7\x02\n\x08NewOrder\x12\x12\n\ntradInstId\x18\x01 \x02(\t\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x12\n\norgClOrdId\x18\x03 \x01(\t\x12\x0c\n\x04side\x18\x04 \x02(\x05\x12\x14\n\x0ctransactTime\x18\x05 \x01(\t\x12\x10\n\x08orderQty\x18\x06 \x02(\x01\x12\x0f\n\x07ordType\x18\x07 \x02(\x05\x12\r\n\x05price\x18\x08 \x01(\x01\x12\x13\n\x0btimeInForce\x18\t \x01(\x05\x12\x0f\n\x07\x63omment\x18\x13 \x01(\t\x12\x0e\n\x06resend\x18\x14 \x02(\x05\x32V\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18n \x02(\x0b\x32\".com.activequant.messages.NewOrder\"\x7f\n\x0eOrderSubmitted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18o \x02(\x0b\x32(.com.activequant.messages.OrderSubmitted\"}\n\rOrderAccepted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18p \x02(\x0b\x32\'.com.activequant.messages.OrderAccepted\"\x7f\n\x0eOrderCancelled\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18q \x02(\x0b\x32(.com.activequant.messages.OrderCancelled\"{\n\x0cOrderUpdated\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2Z\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18r \x02(\x0b\x32&.com.activequant.messages.OrderUpdated\"\x8d\x01\n\x0eSecurityStatus\x12\r\n\x05tdiId\x18\x02 \x02(\t\x12\x0e\n\x06status\x18\x03 \x02(\t2\\\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18s \x02(\x0b\x32(.com.activequant.messages.SecurityStatus\"\x8d\x01\n\rOrderRejected\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x0e\n\x06reason\x18\x03 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18t \x02(\x0b\x32\'.com.activequant.messages.OrderRejected\"\x8b\x01\n\x14OrderUpdateSubmitted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2b\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18u \x02(\x0b\x32..com.activequant.messages.OrderUpdateSubmitted\"\x8b\x01\n\x14OrderCancelSubmitted\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t2b\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18v \x02(\x0b\x32..com.activequant.messages.OrderCancelSubmitted\"\x99\x01\n\x13OrderUpdateRejected\x12\x0f\n\x07\x63lOrdId\x18\x02 \x02(\t\x12\x0e\n\x06reason\x18\x03 \x02(\t2a\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18w \x02(\x0b\x32-.com.activequant.messages.OrderUpdateRejected\"\x88\x02\n\x10\x45xecutionReport2\x12\x0f\n\x07\x63lOrdId\x18\x01 \x02(\t\x12\x0e\n\x06\x65xecId\x18\x02 \x02(\t\x12\x0c\n\x04side\x18\x03 \x02(\t\x12\r\n\x05price\x18\x06 \x02(\x01\x12\r\n\x05tdiId\x18\x07 \x02(\t\x12\x14\n\x0ctransactTime\x18\x08 \x02(\x03\x12\x0b\n\x03qty\x18\r \x02(\x01\x12\x0e\n\x06resend\x18\x0e \x02(\x05\x12\x14\n\x0cquantityLeft\x18\x0f \x02(\x01\x32^\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18x \x02(\x0b\x32*.com.activequant.messages.ExecutionReport2\"}\n\rCustomCommand\x12\x0f\n\x07\x63ommand\x18\x01 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18y \x02(\x0b\x32\'.com.activequant.messages.CustomCommand\"\x88\x01\n\tInfoEvent\x12\x0f\n\x07message\x18\x01 \x02(\t\x12\x11\n\ttimestamp\x18\x02 \x02(\x03\x32W\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18z \x02(\x0b\x32#.com.activequant.messages.InfoEvent\"\xd7\x01\n\x04OHLC\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\x11\n\ttimeFrame\x18\x08 \x02(\x05\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x0c\n\x04open\x18\x03 \x02(\x01\x12\x0c\n\x04high\x18\x04 \x02(\x01\x12\x0b\n\x03low\x18\x05 \x02(\x01\x12\r\n\x05\x63lose\x18\x06 \x02(\x01\x12\x0e\n\x06volume\x18\x07 \x01(\x01\x32R\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18{ \x02(\x0b\x32\x1e.com.activequant.messages.OHLC\"\xb4\x01\n\x04Tick\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\r\n\x05price\x18\x03 \x02(\x01\x12\x10\n\x08quantity\x18\x04 \x02(\x01\x12\x15\n\rtickDirection\x18\x05 \x02(\x05\x32R\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18| \x02(\x0b\x32\x1e.com.activequant.messages.Tick\"\xad\x01\n\x08ValueSet\x12\x11\n\ttimestamp\x18\x01 \x02(\x03\x12\x0c\n\x04type\x18\x02 \x02(\t\x12\n\n\x02id\x18\x03 \x02(\t\x12\r\n\x05\x66ield\x18\x04 \x02(\t\x12\r\n\x05value\x18\x05 \x02(\t2V\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18} \x02(\x0b\x32\".com.activequant.messages.ValueSet\"\x8a\x01\n\x0bMDSubscribe\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x11\n\ttimeframe\x18\x03 \x02(\t2Y\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18~ \x02(\x0b\x32%.com.activequant.messages.MDSubscribe\"\x8e\x01\n\rMDUnsubscribe\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x11\n\ttimeframe\x18\x03 \x02(\t2[\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x7f \x02(\x0b\x32\'.com.activequant.messages.MDUnsubscribe\"\x97\x01\n\x13MDSubscribeResponse\x12\x0e\n\x06status\x18\x02 \x02(\t\x12\x0c\n\x04\x66lag\x18\x03 \x02(\x05\x32\x62\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x80\x01 \x02(\x0b\x32-.com.activequant.messages.MDSubscribeResponse\"\x99\x01\n\x15MDUnsubscribeResponse\x12\x0e\n\x06status\x18\x02 \x02(\t\x12\x0c\n\x04\x66lag\x18\x03 \x02(\x05\x32\x62\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x81\x01 \x02(\x0b\x32-.com.activequant.messages.MDSubscribeResponse\"\xb1\x01\n\x0bHistRequest\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x12\n\nstartDate8\x18\x03 \x02(\x05\x12\x10\n\x08\x65ndDate8\x18\x04 \x02(\x05\x12\x11\n\ttimeframe\x18\x05 \x02(\t2Z\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x82\x01 \x02(\x0b\x32%.com.activequant.messages.HistRequest\"\x95\x02\n\x10HistOhlcResponse\x12\r\n\x05mdiId\x18\x02 \x02(\t\x12\x11\n\ttimestamp\x18\x03 \x03(\x03\x12\x0c\n\x04open\x18\x04 \x03(\x01\x12\x0c\n\x04high\x18\x05 \x03(\x01\x12\x0b\n\x03low\x18\x06 \x03(\x01\x12\r\n\x05\x63lose\x18\x07 \x03(\x01\x12\x0e\n\x06volume\x18\x08 \x03(\x01\x12\r\n\x05\x66inal\x18\t \x02(\x05\x12\x11\n\terrorCode\x18\n \x01(\x05\x12\x14\n\x0c\x65rrorMessage\x18\x0b \x01(\t2_\n\x03\x63md\x12%.com.activequant.messages.BaseMessage\x18\x83\x01 \x02(\x0b\x32*.com.activequant.messages.HistOhlcResponseB&\n\x18\x63om.activequant.messagesB\nAQMessages')
 
 
 
@@ -1514,42 +1514,49 @@ _OHLC = descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='mdiId', full_name='com.activequant.messages.OHLC.mdiId', index=1,
+      name='timeFrame', full_name='com.activequant.messages.OHLC.timeFrame', index=1,
+      number=8, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    descriptor.FieldDescriptor(
+      name='mdiId', full_name='com.activequant.messages.OHLC.mdiId', index=2,
       number=2, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='open', full_name='com.activequant.messages.OHLC.open', index=2,
+      name='open', full_name='com.activequant.messages.OHLC.open', index=3,
       number=3, type=1, cpp_type=5, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='high', full_name='com.activequant.messages.OHLC.high', index=3,
+      name='high', full_name='com.activequant.messages.OHLC.high', index=4,
       number=4, type=1, cpp_type=5, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='low', full_name='com.activequant.messages.OHLC.low', index=4,
+      name='low', full_name='com.activequant.messages.OHLC.low', index=5,
       number=5, type=1, cpp_type=5, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='close', full_name='com.activequant.messages.OHLC.close', index=5,
+      name='close', full_name='com.activequant.messages.OHLC.close', index=6,
       number=6, type=1, cpp_type=5, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='volume', full_name='com.activequant.messages.OHLC.volume', index=6,
+      name='volume', full_name='com.activequant.messages.OHLC.volume', index=7,
       number=7, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1572,7 +1579,7 @@ _OHLC = descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=5041,
-  serialized_end=5237,
+  serialized_end=5256,
 )
 
 
@@ -1634,8 +1641,8 @@ _TICK = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5240,
-  serialized_end=5420,
+  serialized_start=5259,
+  serialized_end=5439,
 )
 
 
@@ -1697,8 +1704,8 @@ _VALUESET = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5423,
-  serialized_end=5596,
+  serialized_start=5442,
+  serialized_end=5615,
 )
 
 
@@ -1739,8 +1746,8 @@ _MDSUBSCRIBE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5599,
-  serialized_end=5737,
+  serialized_start=5618,
+  serialized_end=5756,
 )
 
 
@@ -1781,8 +1788,8 @@ _MDUNSUBSCRIBE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5740,
-  serialized_end=5882,
+  serialized_start=5759,
+  serialized_end=5901,
 )
 
 
@@ -1823,8 +1830,8 @@ _MDSUBSCRIBERESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5885,
-  serialized_end=6036,
+  serialized_start=5904,
+  serialized_end=6055,
 )
 
 
@@ -1865,8 +1872,8 @@ _MDUNSUBSCRIBERESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=6039,
-  serialized_end=6192,
+  serialized_start=6058,
+  serialized_end=6211,
 )
 
 
@@ -1921,8 +1928,8 @@ _HISTREQUEST = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=6195,
-  serialized_end=6372,
+  serialized_start=6214,
+  serialized_end=6391,
 )
 
 
@@ -2019,8 +2026,8 @@ _HISTOHLCRESPONSE = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=6375,
-  serialized_end=6652,
+  serialized_start=6394,
+  serialized_end=6671,
 )
 
 _BASEMESSAGE.fields_by_name['type'].enum_type = _BASEMESSAGE_COMMANDTYPE

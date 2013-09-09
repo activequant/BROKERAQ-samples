@@ -25,8 +25,6 @@ class MyListener(MessageListener):
     def connected(self):
       self.aqSocket.login('demo', 'demo', "PRICE")
       
-    
-
 
 # let's add the main. 
 def main(args):
