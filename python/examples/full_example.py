@@ -11,11 +11,11 @@ del path
 
 
 # aq
-from aq.connectivity.aq_socket import AqSocket
-from aq.connectivity.message_listener import MessageListener
-from aq.connectivity.definitions import Symbols, TimeFrames
-from aq.functions import onlinearchive
-from aq.functions.xmppbot import XmppBot, BaseXMPPListener
+from aq.stream.aq_socket import AqSocket
+from aq.stream.message_listener import MessageListener
+from aq.domainmodel.definitions import Symbols, TimeFrames
+from aq.util import onlinearchive
+from aq.util.xmppbot import XmppBot, BaseXMPPListener
 
 # 3rd party
 import pandas as pd

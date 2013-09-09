@@ -5,7 +5,7 @@ if not path in sys.path:
     sys.path.insert(1, path)
 del path
 
-from aq.functions import onlinearchive
+from aq.util import onlinearchive
 
 import pybacktest
 import matplotlib.pyplot as plt

@@ -20,7 +20,7 @@ import os
 from aq.stream.messages_pb2 import *
 from aq.stream.aq_socket import *
 from aq.stream.message_listener import *
-from aq.stream.definitions import *
+from aq.domainmodel.definitions import *
 
 class MyListener(MessageListener):
     def loggedIn(self):
