@@ -81,7 +81,7 @@ class AqSocket (threading.Thread):
                         lengthBytes = []
                         self.decodeBaseMessage(data)
             except Exception as msg:
-                print 'Error while working with socket:', msg
+                print 'Error while working with socket:', sys.exc_info()
                 if self.sock is not None: 
                     self.sock.close()
                 self.sock = None
