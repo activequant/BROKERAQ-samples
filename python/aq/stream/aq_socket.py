@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
 import threading
 import socket 
 import time
@@ -79,9 +80,12 @@ class AqSocket (threading.Thread):
                         length = varintToNumber(bytearray(lengthBytes))
                         data = self.sock.recv(length)
                         lengthBytes = []
-                        self.decodeBaseMessage(data)
+                        try:
+                            self.decodeBaseMessage(data)
+                        except Exception as decodeExc: 
+                            print sys.exc_info()
             except Exception as msg:
-                print 'Error while working with socket:', sys.exc_info()
+                print 'Error while working with socket:', sys.exc_info(), msg
                 if self.sock is not None: 
                     self.sock.close()
                 self.sock = None
@@ -103,6 +107,7 @@ class AqSocket (threading.Thread):
         self.sock.sendall(b)
         self.sock.sendall(baseMsg)
             
+    # method to subscribe to a live feed.         
     def subscribe(self, instrumentId, timeframe):
         self.logger.info('Subscribing to %s with resolution %s', instrumentId, timeframe)
         baseMsg = BaseMessage()

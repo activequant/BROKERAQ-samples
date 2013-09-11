@@ -16,12 +16,12 @@
 # This file contains various definitions 
 # here we define the most common time frames. 
 class TimeFrames:
-	RAW = "RAW" 
-	MINUTES_1 = "MINUTES_1" 
-	MINUTES_5 = "MINUTES_5"
-	MINUTES_15 = "MINUTES_15"
-	HOURS_1 = "HOURS_1"
-	EOD = "EOD"
+	RAW = "RAW" # Raw is a tick based stream 
+	MINUTES_1 = "MINUTES_1"  # one minute candles ... 
+	MINUTES_5 = "MINUTES_5"  # five minute ...
+	MINUTES_15 = "MINUTES_15" # fifteen ... 
+	HOURS_1 = "HOURS_1" # 1 ... 
+	EOD = "EOD" # ...
 	
 # Here we define the most common symbols, dealable on ACM/SwissQuote.  
 class Symbols:

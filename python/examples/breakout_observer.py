@@ -55,19 +55,19 @@ class MyListener(MessageListener):
   aqsPrice = None
   xmppListener = None
 
-  jid = '@jabber.org'
-  password = ''
-  targetjid = ''
+  jid = 'the_bot_jid'
+  password = 'the_bot_pass'
+  targetjid = '_jid_to_send_alert_to'
 
   def __init__(self):
       super(MyListener, self).__init__()
-      #self.xmppListener = XMPPMessageListener(self)
-      #self.xmpp = XmppBot(self.jid, self.password, self.xmppListener)
-      #if self.xmpp.connect(): 
-      #  self.xmpp.process(block=False)
-      #  print("Done")
-      #else:
-      #  print("Unable to connect.")
+      self.xmppListener = XMPPMessageListener(self)
+      self.xmpp = XmppBot(self.jid, self.password, self.xmppListener)
+      if self.xmpp.connect(): 
+        self.xmpp.process(block=False)
+        print("Done")
+      else:
+        print("Unable to connect.")
       return
   
   def setAqsPrice(self, aqsPrice):
@@ -86,12 +86,20 @@ class MyListener(MessageListener):
       # let's fetch ten days of hourly history. 
       endDate = date.today().strftime('%Y%m%d')
       startDate = (date.today()-timedelta(days=10)).strftime('%Y%m%d')
-      self.candlesHourly[instrumentId] = onlinearchive.history(instrumentId,'HOURS_1',startDate, endDate)          
+      self.candlesHourly[instrumentId] = onlinearchive.history(instrumentId, 'HOURS_1',startDate, endDate)          
+      length = len(self.candlesHourly[instrumentId])
+      lastClose = self.candlesHourly[instrumentId]['C'][length-1]      
+      tradingRange = self.calculateTradingRange(self.candlesHourly[instrumentId][length-10:length])
+      # let's store the current price range for later reuse.         
+      self.currentPriceRanges[instrumentId] = tradingRange
+      self.upperBoundaries[instrumentId] = lastClose + tradingRange
+      self.lowerBoundaries[instrumentId] = lastClose - tradingRange                
+          
       print 'Fetched ', len(self.candlesHourly[instrumentId]), ' candles from history archive.'      
       return
   
   def loggedIn(self):
-    print "Logged in!"
+    print "Breakout watcher ready!"
     # self.xmpp.outgoingQueue.put([self.targetjid, 'Bot is up and running'])
     
     self.init(Symbols.EURUSD)
@@ -127,9 +135,8 @@ class MyListener(MessageListener):
   
   def ohlc(self, ohlc):
     # mdiId stands for market data instrument ID. 
-      
-    print 'ohlc received for ', ohlc.mdiId,': ', ohlc.close, ' in timeframe ', ohlc.timeFrame
     tf = ohlc.timeFrame
+    # let's check the time frame in minutes ... 
     if tf==60:
         # ok, hourly candle received. 
         tempDf = pd.DataFrame({'O': ohlc.open, 'H':ohlc.high,'L':ohlc.low,'C':ohlc.close, 'V':ohlc.volume}, index=[ohlc.timestamp])
@@ -149,40 +156,20 @@ class MyListener(MessageListener):
             # ok, minute candle received. 
             upperBoundary = self.upperBoundaries[ohlc.mdiId]
             lowerBoundary = self.lowerBoundaries[ohlc.mdiId]
+            percDistUp = (upperBoundary / ohlc.close - 1.0)*100.0 
+            percDistDown = (lowerBoundary / ohlc.close - 1.0)*100.0            
+
+            print ohlc.mdiId, '\tClose:', ohlc.close,'\tUpper boundary:', upperBoundary, '(', percDistUp,')\tLower boundary:', lowerBoundary, '(',percDistDown,')'
             if ohlc.close > upperBoundary:
                 print 'UPWARDS BREAKOUT'
                 # let's also pull up the breakout point
                 self.upperBoundaries[ohlc.mdiId] = ohlc.close + self.currentPriceRanges[ohlc.mdiId]
+                self.xmpp.outgoingQueue.put([self.targetjid, ohlc.mdiId+' UPWARDS BREAKOUT'])                    
             if ohlc.close < lowerBoundary: 
                 print 'DOWNWARDS BREAKOUT'
                 # let's pull it down ...
                 self.lowerBoundaries[ohlc.mdiId] = ohlc.close - self.currentPriceRanges[ohlc.mdiId]
-            
-        
-    # let's construct a panda data frame out of it.     
-#    tempDf = pd.DataFrame({'O': ohlc.open, 'H':ohlc.high,'L':ohlc.low,'C':ohlc.close, 'V':ohlc.volume}, index=[ohlc.timestamp])
-#    tempDf.index = pd.to_datetime(tempDf.index)
-#    # let's append this new candle ... 
-#    self.candlesHourly[ohlc.mdiId] = self.candlesHourly[ohlc.mdiId].append(tempDf)
-#    # now, let's calculate the ewma values. 
-#    ewma20 = pd.ewma(self.candles[ohlc.mdiId]['C'], span=20)
-#    ewma50 = pd.ewma(self.candles[ohlc.mdiId]['C'], span=50)
-#    
-#    lastEma20Val = ewma20[len(ewma20)-1]
-#    lastEma50Val = ewma50[len(ewma50)-1]
-#    print "EMAs: ", lastEma20Val, " - ", lastEma50Val
-#    if lastEma20Val > lastEma50Val:
-#        self.currentDirections[ohlc.mdiId] = 'LONG'
-#    else:
-#        self.currentDirections[ohlc.mdiId] = 'SHORT'
-#    if self.crossing(ewma20, ewma50) > 0:
-#        # let's trigger some action ... 
-#        self.xmpp.outgoingQueue.put([self.targetjid, 'LONG '+ohlc.mdiId])
-#        return
-#    if self.crossing(ewma20, ewma50) < 0: 
-#        # let's trigger some action ... 
-#        self.xmpp.outgoingQueue.put([self.targetjid, 'SHORT '+ohlc.mdiId])
-#        return       
+                self.xmpp.outgoingQueue.put([self.targetjid, ohlc.mdiId+' DOWNWARDS BREAKOUT'])
     return
     
     
