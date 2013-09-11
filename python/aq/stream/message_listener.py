@@ -30,7 +30,7 @@ class MessageListener(object):
     
     def __init__(self):
         logging.basicConfig(format='%(asctime)-15s %(name)s %(message)s')
-        self.logger = logging.getLogger('AQSocket')
+        self.logger = logging.getLogger('MessageListener')
         self.logger.setLevel(logging.INFO)
         self.logger.info('Initializing message listener.')
         return
@@ -118,24 +118,29 @@ class MessageListener(object):
         self.logger.info('------------------------')
         return        
 
+    # unused at the moment. 
     def mdSubscribeResponse(self, mdSubRes):
         self.logger.info('=== MD Subscribe Response ===')
         self.logger.info(mdSubRes)
         self.logger.info('-----------------------------')
         return
         
+    # unused at the moment. 
     def mdUnsubscribeResponse(self, mdUnsubRes):
         self.logger.info('=== MD Unsubscribe Response ===')
         self.logger.info(mdUnsubRes)
         self.logger.info('-------------------------------')
         return    
     
+    # the server sends out open/high/low/close bars at regular intervals. 
+    # these bars arrive here. 
     def ohlc(self, ohlc):
         self.logger.info('=== OHLC ===')
         self.logger.info(ohlc)
         self.logger.info('------------')
         return
-        
+
+    # Unused at the moment in favor of a plain out-of-band http history fetch    
     def historicalOHLC(self, historicalData):
         self.logger.info('=== Historical data ===')
         self.logger.info(historicalData)

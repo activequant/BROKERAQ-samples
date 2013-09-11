@@ -107,7 +107,9 @@ class AqSocket (threading.Thread):
         self.sock.sendall(b)
         self.sock.sendall(baseMsg)
             
-    # method to subscribe to a live feed.         
+    # method to subscribe to a live feed.        
+    # it is recommended that you use isntrumentIds from the Symbols definition
+    # time frames are also contained in the defintions file (see domainmodel folder)
     def subscribe(self, instrumentId, timeframe):
         self.logger.info('Subscribing to %s with resolution %s', instrumentId, timeframe)
         baseMsg = BaseMessage()
@@ -117,6 +119,7 @@ class AqSocket (threading.Thread):
         req.timeframe = timeframe
         self.sendFrame(baseMsg.SerializeToString())
     
+    # a method to unsubscribe from a price feed. 
     def unsubscribe(self, instrumentId, timeframe):
         self.logger.info('Unsubscribing from %s with resolution %s', instrumentId, timeframe)
         baseMsg = BaseMessage()
@@ -126,6 +129,7 @@ class AqSocket (threading.Thread):
         req.timeframe = timeframe
         self.sendFrame(baseMsg.SerializeToString())
     
+    # method to send an in-band history request to the server. 
     def requestHistory(self, instrumentId, timeframe, startDate8, endDate8):
         self.logger.info('Requesting history for %s with resolution %s', instrumentId, timeframe)
         baseMsg = BaseMessage()
@@ -226,7 +230,7 @@ class AqSocket (threading.Thread):
     def updateOrder(self, orderId, newPrice, newQuantity):
         return
     
-    # generates and returns a new order id
+    # generates and returns a new order id, should be used internally only. 
     def genOid(self):
         self.orderCounter = self.orderCounter + 1
         return self.orderCounter
