@@ -28,7 +28,7 @@ class AqSocket (threading.Thread):
 
     sock = None 
     messageListener = None
-    host = 'localhost'
+    host = '78.47.96.150' # by default we connect to the demo server. 
     port = 59999   
     orderCounter = 0
     logger = None
@@ -82,8 +82,8 @@ class AqSocket (threading.Thread):
                         lengthBytes = []
                         try:
                             self.decodeBaseMessage(data)
-                        except Exception as decodeExc: 
-                            print sys.exc_info()
+                        except Exception: 
+                            self.logger.warn(sys.exc_info())
             except Exception as msg:
                 print 'Error while working with socket:', sys.exc_info(), msg
                 if self.sock is not None: 

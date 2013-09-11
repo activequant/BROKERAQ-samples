@@ -23,13 +23,16 @@ import sleekxmpp
 
 
 class BaseXMPPListener: 
+    botReference = None
+    
     def message(self, msg):
-        print 'XMPP Message received: ', msg
+        self.logger.info('XMPP Message received: ', msg)
 
 class XmppBot(sleekxmpp.ClientXMPP):
 
     outgoingQueue = Queue()    
     messageListener = None
+    logger = None 
     
     def worker(self):
         while True:
@@ -41,7 +44,13 @@ class XmppBot(sleekxmpp.ClientXMPP):
             
 
     def __init__(self, jid, password, ml):
+        logging.basicConfig(format='%(asctime)-15s %(name)s %(message)s')
+        self.logger = logging.getLogger('XmppBot')
+        self.logger.setLevel(logging.INFO)
+        self.logger.info('Initializing XMPPBot.')
+
         self.messageListener = ml
+        ml.botReference = self 
         sleekxmpp.ClientXMPP.__init__(self, jid, password)
         self.add_event_handler("session_start", self.start)
         self.add_event_handler("message", self.message)
@@ -56,7 +65,7 @@ class XmppBot(sleekxmpp.ClientXMPP):
 
     def message(self, msg):
         if self.messageListener is None: 
-            print 'No message listener registered.'
+            self.loger.info('No message listener registered.')
             if msg['type'] in ('chat', 'normal'):
                 msg.reply("You sent\n%(body)s" % msg).send()
         else: 
