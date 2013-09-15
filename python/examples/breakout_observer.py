@@ -15,7 +15,8 @@
 
 
 from datetime import date, timedelta
-
+import datetime
+import logging
 
 # aq
 from aq.stream.aq_socket import AqSocket
@@ -36,7 +37,7 @@ class XMPPMessageListener(BaseXMPPListener):
     
     def message(self, msg):
         print 'XMPP Message received: ', msg
-        msg.reply('All fine.').send()
+        msg.reply('All fine from the breakout watcher.').send()
 
 
 # This class looks for periods of low valitity and flat prices.
@@ -55,19 +56,19 @@ class MyListener(MessageListener):
   aqsPrice = None
   xmppListener = None
 
-  jid = 'the_bot_jid'
-  password = 'the_bot_pass'
-  targetjid = '_jid_to_send_alert_to'
+  jid = 'XXXX@activequant.com'
+  password = 'XXXX'
+  targetjid = 'XXXX@activequant.com'
 
   def __init__(self):
       super(MyListener, self).__init__()
       self.xmppListener = XMPPMessageListener(self)
       self.xmpp = XmppBot(self.jid, self.password, self.xmppListener)
+      self.xmpp.process()
       if self.xmpp.connect(): 
-        self.xmpp.process(block=False)
-        print("Done")
+        self.logger.info("Done")
       else:
-        print("Unable to connect.")
+        self.logger.info("Unable to connect.")
       return
   
   def setAqsPrice(self, aqsPrice):
@@ -79,10 +80,11 @@ class MyListener(MessageListener):
   # called as soon as the socket got connected to the trading servers. 
   def connected(self):
       # now that we are connected, let's send the login message. 
-      self.aqsPrice.login(brokeraqUid, brokeraqPwd, "PRICE")
+      self.aqSocket.login(brokeraqUid, brokeraqPwd, "PRICE")
 
   
-  def init(self, instrumentId):      
+  def init(self, instrumentId):
+      self.logger.info('Initializing ' + instrumentId)
       # let's fetch ten days of hourly history. 
       endDate = date.today().strftime('%Y%m%d')
       startDate = (date.today()-timedelta(days=10)).strftime('%Y%m%d')
@@ -95,32 +97,22 @@ class MyListener(MessageListener):
       self.upperBoundaries[instrumentId] = lastClose + tradingRange
       self.lowerBoundaries[instrumentId] = lastClose - tradingRange                
           
-      print 'Fetched ', len(self.candlesHourly[instrumentId]), ' candles from history archive.'      
+      print 'Fetched ', len(self.candlesHourly[instrumentId]), ' candles from history archive.'
       return
   
   def loggedIn(self):
-    print "Breakout watcher ready!"
-    # self.xmpp.outgoingQueue.put([self.targetjid, 'Bot is up and running'])
-    
-    self.init(Symbols.EURUSD)
-    self.aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.HOURS_1)
-    self.aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.MINUTES_1)
-    
-    self.init(Symbols.OILUSD)
-    self.aqsPrice.subscribe(Symbols.OILUSD, TimeFrames.HOURS_1)    
-    self.aqsPrice.subscribe(Symbols.OILUSD, TimeFrames.MINUTES_1)
-    
-    self.init(Symbols.EURCHF)
-    self.aqsPrice.subscribe(Symbols.EURCHF, TimeFrames.HOURS_1)    
-    self.aqsPrice.subscribe(Symbols.EURCHF, TimeFrames.MINUTES_1)
-    
-    self.init(Symbols.USDCHF)
-    self.aqsPrice.subscribe(Symbols.USDCHF, TimeFrames.HOURS_1)
-    self.aqsPrice.subscribe(Symbols.USDCHF, TimeFrames.MINUTES_1)
-    
-    self.init(Symbols.XAGUSD)
-    self.aqsPrice.subscribe(Symbols.XAGUSD, TimeFrames.HOURS_1)
-    self.aqsPrice.subscribe(Symbols.XAGUSD, TimeFrames.MINUTES_1)
+    self.logger.info("Breakout watcher ready!")
+    self.xmpp.outgoingQueue.put([self.targetjid, 'Breakout watcher ready!'])
+    # let's subscribe to all instruments on the server (not many at the moment)
+    i=0    
+    members = [attr for attr in dir(Symbols()) if not callable(attr) and not attr.startswith("__")]
+    for s in members:
+       i = i + 1
+       symbol = getattr(Symbols(), s)
+       self.init(symbol)
+       self.aqSocket.subscribe(symbol, TimeFrames.HOURS_1)
+       self.aqSocket.subscribe(symbol, TimeFrames.MINUTES_1)
+       
 
 
   def calculateTradingRange(self, candles):
@@ -129,11 +121,12 @@ class MyListener(MessageListener):
     hVector = candles['H']
     lVector = candles['L']
     #cVector = candles['C']
-    dailyRanges = hVector - lVector
-    meanRange = mean(dailyRanges)
+    slotRanges = hVector - lVector 
+    meanRange = slotRanges.mean()
     return meanRange
   
   def ohlc(self, ohlc):
+    self.logger.info('OHLC.')
     # mdiId stands for market data instrument ID. 
     tf = ohlc.timeFrame
     # let's check the time frame in minutes ... 
@@ -159,14 +152,14 @@ class MyListener(MessageListener):
             percDistUp = (upperBoundary / ohlc.close - 1.0)*100.0 
             percDistDown = (lowerBoundary / ohlc.close - 1.0)*100.0            
 
-            print ohlc.mdiId, '\tClose:', ohlc.close,'\tUpper boundary:', upperBoundary, '(', percDistUp,')\tLower boundary:', lowerBoundary, '(',percDistDown,')'
+            print datetime.datetime.now(), "\t", ohlc.mdiId, '\tClose:', ohlc.close,'\tUpper boundary:', upperBoundary, '(', percDistUp,')\tLower boundary:', lowerBoundary, '(',percDistDown,')'
             if ohlc.close > upperBoundary:
-                print 'UPWARDS BREAKOUT'
+                self.logger.info("UPWARDS BREAKOUT %s" % ohlc.mdiId)
                 # let's also pull up the breakout point
                 self.upperBoundaries[ohlc.mdiId] = ohlc.close + self.currentPriceRanges[ohlc.mdiId]
                 self.xmpp.outgoingQueue.put([self.targetjid, ohlc.mdiId+' UPWARDS BREAKOUT'])                    
             if ohlc.close < lowerBoundary: 
-                print 'DOWNWARDS BREAKOUT'
+                self.logger.info("DOWNWARDS BREAKOUT %s" % ohlc.mdiId)
                 # let's pull it down ...
                 self.lowerBoundaries[ohlc.mdiId] = ohlc.close - self.currentPriceRanges[ohlc.mdiId]
                 self.xmpp.outgoingQueue.put([self.targetjid, ohlc.mdiId+' DOWNWARDS BREAKOUT'])
@@ -175,12 +168,12 @@ class MyListener(MessageListener):
     
 ############### MAIN CODE START     
 # let's create the listener. 
+logging.basicConfig(level=logging.INFO, format='%(asctime)-15s %(name)s| %(message)s')
 
-brokeraqUid = 'demo'
-brokeraqPwd = 'demo'
+brokeraqUid = 'XXXX'
+brokeraqPwd = 'XXXX'
 
 listener = MyListener()
 aqsPrice = AqSocket(listener)
-listener.setAqsPrice(aqsPrice)
 aqsPrice.host = '78.47.96.150'
 aqsPrice.connect()

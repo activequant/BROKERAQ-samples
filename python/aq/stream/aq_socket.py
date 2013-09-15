@@ -15,6 +15,7 @@
 
 import sys
 import threading
+import traceback    
 import socket 
 import time
 import logging
@@ -38,9 +39,8 @@ class AqSocket (threading.Thread):
 
     # plain constructor. 
     def __init__(self, mlistener):
-        logging.basicConfig(format='%(asctime)-15s %(name)s %(message)s')
         self.logger = logging.getLogger('AQSocket')
-        self.logger.setLevel(logging.INFO)
+        self.logger.setLevel(logging.DEBUG)
         self.logger.info('Initializing AQSocket.')
         threading.Thread.__init__(self)
         # let's store the reference to the message listener. 
@@ -83,6 +83,7 @@ class AqSocket (threading.Thread):
                         try:
                             self.decodeBaseMessage(data)
                         except Exception: 
+                            traceback.print_exc()
                             self.logger.warn(sys.exc_info())
             except Exception as msg:
                 print 'Error while working with socket:', sys.exc_info(), msg

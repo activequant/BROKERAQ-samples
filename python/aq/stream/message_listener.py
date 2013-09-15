@@ -29,7 +29,6 @@ class MessageListener(object):
     aqSocket = None
     
     def __init__(self):
-        logging.basicConfig(format='%(asctime)-15s %(name)s %(message)s')
         self.logger = logging.getLogger('MessageListener')
         self.logger.setLevel(logging.INFO)
         self.logger.info('Initializing message listener.')

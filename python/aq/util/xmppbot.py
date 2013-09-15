@@ -44,10 +44,9 @@ class XmppBot(sleekxmpp.ClientXMPP):
             
 
     def __init__(self, jid, password, ml):
-        logging.basicConfig(format='%(asctime)-15s %(name)s %(message)s')
         self.logger = logging.getLogger('XmppBot')
-        self.logger.setLevel(logging.INFO)
-        self.logger.info('Initializing XMPPBot.')
+        self.logger.setLevel(logging.DEBUG)
+        self.logger.debug('Initializing XMPPBot ...')
 
         self.messageListener = ml
         ml.botReference = self 

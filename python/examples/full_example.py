@@ -53,7 +53,7 @@ class XMPPMessageListener(BaseXMPPListener):
 # Moving average cross over notifier. 
 # author: GhostRider
 # Listener class. 
-class MyListener(MessageListener):
+class CrossOverMonitor(MessageListener):
   
   currentDirections = {}
   candles = {}
@@ -66,7 +66,7 @@ class MyListener(MessageListener):
   targetjid = ''
 
   def __init__(self):
-      super(MyListener, self).__init__()
+      super(CrossOverMonitor, self).__init__()
       self.xmppListener = XMPPMessageListener(self)
       self.xmpp = XmppBot(self.jid, self.password, self.xmppListener)
       if self.xmpp.connect(): 
@@ -159,11 +159,10 @@ class MyListener(MessageListener):
 ############### MAIN CODE START     
 # let's create the listener. 
 
-brokeraqUid = 'demo'
-brokeraqPwd = 'demo'
+brokeraqUid = 'XXXX'
+brokeraqPwd = 'XXXX'
 
-listener = MyListener()
+listener = CrossOverMonitor()
 aqsPrice = AqSocket(listener)
 listener.setAqsPrice(aqsPrice)
-aqsPrice.host = '78.47.96.150'
 aqsPrice.connect()
