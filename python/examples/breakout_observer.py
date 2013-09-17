@@ -17,7 +17,7 @@
 from datetime import date, timedelta
 import datetime
 import logging
-
+import signal, os
 # aq
 from aq.stream.aq_socket import AqSocket
 from aq.stream.message_listener import MessageListener
@@ -164,8 +164,9 @@ class MyListener(MessageListener):
                 self.lowerBoundaries[ohlc.mdiId] = ohlc.close - self.currentPriceRanges[ohlc.mdiId]
                 self.xmpp.outgoingQueue.put([self.targetjid, ohlc.mdiId+' DOWNWARDS BREAKOUT'])
     return
-    
-    
+      
+
+
 ############### MAIN CODE START     
 # let's create the listener. 
 logging.basicConfig(level=logging.INFO, format='%(asctime)-15s %(name)s| %(message)s')
@@ -177,3 +178,4 @@ listener = MyListener()
 aqsPrice = AqSocket(listener)
 aqsPrice.host = '78.47.96.150'
 aqsPrice.connect()
+

@@ -97,6 +97,6 @@ class Symbols:
         
         def allInstruments(self):
           # getting all attributes and excluding the all instruments method. 
-          members = [attr for attr in dir(self) if not callable(attr) and not attr.startswith("__") and not attr.startsWith("allInstruments")]
+          members = [attr for attr in dir(self) if not callable(attr) and not attr.startswith("__") and not attr.startswith("allInstruments")]
           return members
          
