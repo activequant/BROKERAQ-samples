@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
+import sys, signal, os
 import logging
 import getpass
 from threading import Thread
@@ -32,7 +32,8 @@ class XmppBot(sleekxmpp.ClientXMPP):
 
     outgoingQueue = Queue()    
     messageListener = None
-    logger = None 
+    logger = None
+    t = None 
     
     def worker(self):
         while True:
@@ -54,17 +55,31 @@ class XmppBot(sleekxmpp.ClientXMPP):
         self.add_event_handler("session_start", self.start)
         self.add_event_handler("message", self.message)
 
+        signal.signal(signal.SIGBREAK, self.sigHandler)
+        signal.signal(signal.SIGINT, self.sigHandler)
+        signal.signal(signal.SIGTERM, self.sigHandler)     
+          
+          
+    def sigHandler(self, a, b):
+        self.quitBot()
+        
+    def quitBot(self):
+        self.logger.info("Quit bot called.")        
+        self.disconnect()
+        self.t.join()
+        self.join()
+
     def start(self, event):
         self.send_presence()
         self.get_roster()
         # let's also spawn a message sender thread. 
-        t = Thread(target=self.worker)
-        t.daemon = True
-        t.start()
+        self.t = Thread(target=self.worker)
+        self.t.daemon = True
+        self.t.start()
 
     def message(self, msg):
         if self.messageListener is None: 
-            self.loger.info('No message listener registered.')
+            self.logger.info('No message listener registered.')
             if msg['type'] in ('chat', 'normal'):
                 msg.reply("You sent\n%(body)s" % msg).send()
         else: 

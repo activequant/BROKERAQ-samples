@@ -16,6 +16,7 @@
 import sys
 import threading
 import traceback    
+import signal, os
 import socket 
 import time
 import logging
@@ -48,10 +49,27 @@ class AqSocket (threading.Thread):
         # let's also set a link back to the message listener. 
         mlistener.aqSocket = self
         self.kill_received = False
-            
+        #  let's register the signals. 
+        signal.signal(signal.SIGBREAK, self.sigHandler)
+        signal.signal(signal.SIGINT, self.sigHandler)
+        signal.signal(signal.SIGTERM, self.sigHandler)            
+        
     # connects the socket and starts the read thread. 
     def connect(self):
         self.start()
+        
+    def sigHandler(self, a, b):
+        print 'SIGHANDLER', a, b
+        # for now, we just quit. 
+        self.quitSocket()
+        sys.exit()   # feedback requested.      
+        
+    def quitSocket(self):
+        self.logger.info("Socket quit called.");
+        self.kill_received = True
+        if self.sock is not None: 
+            self.sock.close()
+        self.join()
         
     # read loop
     def run(self):
