@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import logging 
+
 from aq.stream.messages_pb2 import *
 from aq.stream.aq_socket import *
 from aq.stream.message_listener import *
@@ -28,6 +30,7 @@ class MyListener(MessageListener):
 
 # let's add the main. 
 def main(args):
+    logging.basicConfig(level=logging.INFO, format='%(asctime)-15s %(name)s| %(message)s')
     aqsPrice = AqSocket(MyListener())            
     aqsPrice.host = '78.47.96.150'    
     aqsPrice.connect()

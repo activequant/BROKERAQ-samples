@@ -61,7 +61,7 @@ class MyListener(MessageListener):
   targetjid = 'XXXX@activequant.com'
 
   def __init__(self):
-      super(MyListener, self).__init__()
+      super(MessageListener, self).__init__()
       self.xmppListener = XMPPMessageListener(self)
       self.xmpp = XmppBot(self.jid, self.password, self.xmppListener)
       self.xmpp.process()

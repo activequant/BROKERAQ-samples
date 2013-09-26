@@ -16,6 +16,7 @@
 import pandas as pd
 import numpy as np
 
+# fetches instrument history from the online archive. 
 def history(instrument, timeframe, startDate8, endDate8):
   url = 'http://78.47.96.150:44444/csv/?SERIESID=' + instrument + '&FREQ=' + timeframe + '&FIELD=O,H,L,C&STARTDATE=' + str(startDate8) + '&ENDDATE=' + str(endDate8)
   # print url  
@@ -26,4 +27,11 @@ def history(instrument, timeframe, startDate8, endDate8):
   del x['DateTime']
   # 
   return x
+
   
+# fetches the current price snapshot, the price snapshot must have the same format as a history list. 
+def currentPriceSnapshot(instrument):
+    url = 'http://78.47.96.150:55115/instsnap?instrument=' + instrument
+    x = pd.read_csv(url, index_col=[0])
+    x.index = pd.to_datetime(x.index)
+    return x; 

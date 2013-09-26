@@ -85,8 +85,10 @@ class AqSocket (threading.Thread):
                     self.messageListener.connected()
                 lengthBytes = [] 
                 # check if we received a kill signal.                    
-                while not self.kill_received:            
+                while not self.kill_received:      
+                    self.logger.debug("Waiting for data")
                     data = self.sock.recv(1)
+                    self.logger.debug("Received a byte.")                    
                     if len(data) == 0:
                         if self.messageListener!=None:
                             self.messageListener.disconnected()
@@ -125,6 +127,8 @@ class AqSocket (threading.Thread):
         # send the frame
         self.sock.sendall(b)
         self.sock.sendall(baseMsg)
+        self.logger.debug('frame sent.')
+        
             
     # method to subscribe to a live feed.        
     # it is recommended that you use isntrumentIds from the Symbols definition
