@@ -236,7 +236,6 @@ class AqSocket (threading.Thread):
         self.sendFrame(baseMsg.SerializeToString())
         return
     
-    
     # sends a buy stop market order over the wire - order type 3
     def stopBuy(self, instrumentId, quantity, price):
         return
@@ -244,9 +243,19 @@ class AqSocket (threading.Thread):
     # sends a sell stop market order over the wire - order type 3
     def stopSell(self, instrumentId, quantity, price):
         return
-    
-    
-    def cancelOrder(self, orderId):
+
+    # will cancel an order on the server        
+    def cancelOrder(self, orderId, tradInstId, side, qty, comment):
+        baseMsg = BaseMessage()
+        baseMsg.type = BaseMessage.ORD_CNCL_REQ
+        cancelMsg = baseMsg.Extensions[OrderCancelRequest.cmd]
+        requestId = self.genOid();
+        cancelMsg.orderId = "%s" % orderId
+        cancelMsg.requestId = "%s" % requestId
+        cancelMsg.tradInstId = tradInstId
+        cancelMsg.side = side
+        cancelMsg.orderQty = qty
+        cancelMsg.comment = comment        
         return
     
     # it is only possible to update limit orders with new price and quantity.  

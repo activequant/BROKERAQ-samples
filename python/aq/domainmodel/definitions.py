@@ -94,6 +94,8 @@ class Symbols:
         XAUUSD = "XAUUSD"
         XPDUSD = "XPDUSD"
         XPTUSD = "XPTUSD"
+        ZNLUSD = "ZNLUSD"
+        TEST_FEED = "TEST_FEED"  # the test feed instrument ticks regularly on the server and is always available. 
         
         def allInstruments(self):
           # getting all attributes and excluding the all instruments method. 
