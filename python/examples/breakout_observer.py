@@ -87,11 +87,11 @@ class MyListener(MessageListener):
       self.logger.info('Initializing ' + instrumentId)
       # let's fetch ten days of hourly history. 
       endDate = date.today().strftime('%Y%m%d')
-      startDate = (date.today()-timedelta(days=10)).strftime('%Y%m%d')
-      self.candlesHourly[instrumentId] = onlinearchive.history(instrumentId, 'HOURS_1',startDate, endDate)          
+      startDate = (date.today() - timedelta(days=10)).strftime('%Y%m%d')
+      self.candlesHourly[instrumentId] = onlinearchive.history(instrumentId, 'HOURS_1', startDate, endDate)          
       length = len(self.candlesHourly[instrumentId])
-      lastClose = self.candlesHourly[instrumentId]['C'][length-1]      
-      tradingRange = self.calculateTradingRange(self.candlesHourly[instrumentId][length-10:length])
+      lastClose = self.candlesHourly[instrumentId]['C'][length - 1]      
+      tradingRange = self.calculateTradingRange(self.candlesHourly[instrumentId][length - 10:length])
       # let's store the current price range for later reuse.         
       self.currentPriceRanges[instrumentId] = tradingRange
       self.upperBoundaries[instrumentId] = lastClose + tradingRange
@@ -104,7 +104,7 @@ class MyListener(MessageListener):
     self.logger.info("Breakout watcher ready!")
     self.xmpp.outgoingQueue.put([self.targetjid, 'Breakout watcher ready!'])
     # let's subscribe to all instruments on the server (not many at the moment)
-    i=0    
+    i = 0    
     members = [attr for attr in dir(Symbols()) if not callable(attr) and not attr.startswith("__")]
     for s in members:
        i = i + 1
@@ -116,11 +116,11 @@ class MyListener(MessageListener):
 
 
   def calculateTradingRange(self, candles):
-    #length = len(candles)
-    #oVector = candles['O']
+    # length = len(candles)
+    # oVector = candles['O']
     hVector = candles['H']
     lVector = candles['L']
-    #cVector = candles['C']
+    # cVector = candles['C']
     slotRanges = hVector - lVector 
     meanRange = slotRanges.mean()
     return meanRange
@@ -130,39 +130,39 @@ class MyListener(MessageListener):
     # mdiId stands for market data instrument ID. 
     tf = ohlc.timeFrame
     # let's check the time frame in minutes ... 
-    if tf==60:
+    if tf == 60:
         # ok, hourly candle received. 
-        tempDf = pd.DataFrame({'O': ohlc.open, 'H':ohlc.high,'L':ohlc.low,'C':ohlc.close, 'V':ohlc.volume}, index=[ohlc.timestamp])
+        tempDf = pd.DataFrame({'O': ohlc.open, 'H':ohlc.high, 'L':ohlc.low, 'C':ohlc.close, 'V':ohlc.volume}, index=[ohlc.timestamp])
         tempDf.index = pd.to_datetime(tempDf.index)
         # let's append this new candle ... 
         self.candlesHourly[ohlc.mdiId] = self.candlesHourly[ohlc.mdiId].append(tempDf)
         # now, let's update the uper and lower threshold
         length = len(self.candlesHourly[ohlc.mdiId])
         # let's calculate the average trading range over the last five hours
-        tradingRange = self.calculateTradingRange(self.candlesHourly[ohlc.mdiId][length-10:length])
+        tradingRange = self.calculateTradingRange(self.candlesHourly[ohlc.mdiId][length - 10:length])
         # let's store the current price range for later reuse.         
         self.currentPriceRanges[ohlc.mdiId] = tradingRange
         self.upperBoundaries[ohlc.mdiId] = ohlc.close + tradingRange
         self.lowerBoundaries[ohlc.mdiId] = ohlc.close - tradingRange                
-    if tf==1: 
+    if tf == 1: 
         if self.currentPriceRanges[ohlc.mdiId] is not None: 
             # ok, minute candle received. 
             upperBoundary = self.upperBoundaries[ohlc.mdiId]
             lowerBoundary = self.lowerBoundaries[ohlc.mdiId]
-            percDistUp = (upperBoundary / ohlc.close - 1.0)*100.0 
-            percDistDown = (lowerBoundary / ohlc.close - 1.0)*100.0            
+            percDistUp = (upperBoundary / ohlc.close - 1.0) * 100.0 
+            percDistDown = (lowerBoundary / ohlc.close - 1.0) * 100.0            
 
-            print datetime.datetime.now(), "\t", ohlc.mdiId, '\tClose:', ohlc.close,'\tUpper boundary:', upperBoundary, '(', percDistUp,')\tLower boundary:', lowerBoundary, '(',percDistDown,')'
+            print datetime.datetime.now(), "\t", ohlc.mdiId, '\tClose:', ohlc.close, '\tUpper boundary:', upperBoundary, '(', percDistUp, ')\tLower boundary:', lowerBoundary, '(', percDistDown, ')'
             if ohlc.close > upperBoundary:
                 self.logger.info("UPWARDS BREAKOUT %s" % ohlc.mdiId)
                 # let's also pull up the breakout point
                 self.upperBoundaries[ohlc.mdiId] = ohlc.close + self.currentPriceRanges[ohlc.mdiId]
-                self.xmpp.outgoingQueue.put([self.targetjid, ohlc.mdiId+' UPWARDS BREAKOUT'])                    
+                self.xmpp.outgoingQueue.put([self.targetjid, ohlc.mdiId + ' UPWARDS BREAKOUT'])                    
             if ohlc.close < lowerBoundary: 
                 self.logger.info("DOWNWARDS BREAKOUT %s" % ohlc.mdiId)
                 # let's pull it down ...
                 self.lowerBoundaries[ohlc.mdiId] = ohlc.close - self.currentPriceRanges[ohlc.mdiId]
-                self.xmpp.outgoingQueue.put([self.targetjid, ohlc.mdiId+' DOWNWARDS BREAKOUT'])
+                self.xmpp.outgoingQueue.put([self.targetjid, ohlc.mdiId + ' DOWNWARDS BREAKOUT'])
     return
       
 

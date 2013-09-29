@@ -27,13 +27,17 @@ from aq.stream.message_listener import *
 from aq.domainmodel.definitions import *
 
 class MyListener(MessageListener):
-  def loggedIn(self):
-    print "Logged in!"
-    #aqsOrder.marketSell(Symbols.EURUSD, 100000)    
-    aqsOrder.limitBuy(Symbols.EURUSD, 100000, 1.2)    
-  def connected(self):
-    aqsOrder.login('demo', 'demo', "TRADE")
-    
+    def loggedIn(self):
+        print "Logged in!"
+        # aqsOrder.marketSell(Symbols.EURUSD, 100000)    
+        aqsOrder.limitBuy(Symbols.EURUSD, 100000, 1.2)
+            
+    def connected(self):
+        aqsOrder.login('demo', 'demo', "TRADE")
+
+
+# let's set up basic logging.     
+logging.basicConfig(level=logging.INFO, format='%(asctime)-15s %(name)s| %(message)s')
 
 aqsOrder = AqSocket(MyListener())
 aqsOrder.host = '78.47.96.150'

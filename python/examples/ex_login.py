@@ -25,8 +25,9 @@ class MyListener(MessageListener):
       print "Logged in!"
     
     def connected(self):
-      self.aqSocket.login('demo', 'demo', "PRICE")
+        self.aqSocket.login('demo', 'demo', "PRICE")
       
+
 
 # let's add the main. 
 def main(args):
@@ -36,4 +37,4 @@ def main(args):
     aqsPrice.connect()
 
 if __name__ == '__main__':
-  main(sys.argv)
+    main(sys.argv)

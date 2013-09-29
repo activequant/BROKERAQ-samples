@@ -45,7 +45,7 @@ class XMPPMessageListener(BaseXMPPListener):
     def message(self, msg):
         print 'XMPP Message received: ', msg
         if msg['body'] == 'status':
-            msg.reply("Current %s" %self.myListener.currentDirections).send()
+            msg.reply("Current %s" % self.myListener.currentDirections).send()
 	else:
 	    msg.reply('All fine.').send()
 
@@ -89,9 +89,9 @@ class CrossOverMonitor(MessageListener):
   def init(self, instrumentId):      
       # let's fetch ten days of hourly history. 
       endDate = date.today().strftime('%Y%m%d')
-      startDate = (date.today()-timedelta(days=10)).strftime('%Y%m%d')
+      startDate = (date.today() - timedelta(days=10)).strftime('%Y%m%d')
       
-      self.candles[instrumentId] = onlinearchive.history(instrumentId,'HOURS_1',startDate, endDate)          
+      self.candles[instrumentId] = onlinearchive.history(instrumentId, 'HOURS_1', startDate, endDate)          
       print 'Fetched ', len(self.candles[instrumentId]), ' candles from history archive.'      
       return
   
@@ -118,19 +118,19 @@ class CrossOverMonitor(MessageListener):
 
   # checks if a series crossed. 
   def crossing(self, series1, series2):
-      if len(series1)==len(series2) and len(series1) > 1:
+      if len(series1) == len(series2) and len(series1) > 1:
           length = len(series1)
-          if series1[length-2] > series2[length-2] and series1[length-1] < series2[length-1]:
+          if series1[length - 2] > series2[length - 2] and series1[length - 1] < series2[length - 1]:
               print 'SHORT'
               return -1
-          if series1[length-2] < series2[length-2] and series1[length-1] > series2[length-1]:
+          if series1[length - 2] < series2[length - 2] and series1[length - 1] > series2[length - 1]:
               print 'LONG'
               return 1                
       return 0
   
   def ohlc(self, ohlc):
-    print 'ohlc received for ', ohlc.mdiId,': ', ohlc.close
-    tempDf = pd.DataFrame({'O': ohlc.open, 'H':ohlc.high,'L':ohlc.low,'C':ohlc.close, 'V':ohlc.volume}, index=[ohlc.timestamp])
+    print 'ohlc received for ', ohlc.mdiId, ': ', ohlc.close
+    tempDf = pd.DataFrame({'O': ohlc.open, 'H':ohlc.high, 'L':ohlc.low, 'C':ohlc.close, 'V':ohlc.volume}, index=[ohlc.timestamp])
     tempDf.index = pd.to_datetime(tempDf.index)
     # let's append this new candle ... 
     self.candles[ohlc.mdiId] = self.candles[ohlc.mdiId].append(tempDf)
@@ -138,8 +138,8 @@ class CrossOverMonitor(MessageListener):
     ewma20 = pd.ewma(self.candles[ohlc.mdiId]['C'], span=20)
     ewma50 = pd.ewma(self.candles[ohlc.mdiId]['C'], span=50)
     
-    lastEma20Val = ewma20[len(ewma20)-1]
-    lastEma50Val = ewma50[len(ewma50)-1]
+    lastEma20Val = ewma20[len(ewma20) - 1]
+    lastEma50Val = ewma50[len(ewma50) - 1]
     print "EMAs: ", lastEma20Val, " - ", lastEma50Val
     if lastEma20Val > lastEma50Val:
         self.currentDirections[ohlc.mdiId] = 'LONG'
@@ -147,11 +147,11 @@ class CrossOverMonitor(MessageListener):
         self.currentDirections[ohlc.mdiId] = 'SHORT'
     if self.crossing(ewma20, ewma50) > 0:
         # let's trigger some action ... 
-        self.xmpp.outgoingQueue.put([self.targetjid, 'LONG '+ohlc.mdiId])
+        self.xmpp.outgoingQueue.put([self.targetjid, 'LONG ' + ohlc.mdiId])
         return
     if self.crossing(ewma20, ewma50) < 0: 
         # let's trigger some action ... 
-        self.xmpp.outgoingQueue.put([self.targetjid, 'SHORT '+ohlc.mdiId])
+        self.xmpp.outgoingQueue.put([self.targetjid, 'SHORT ' + ohlc.mdiId])
         return    
     return
     
@@ -161,6 +161,13 @@ class CrossOverMonitor(MessageListener):
 
 brokeraqUid = 'XXXX'
 brokeraqPwd = 'XXXX'
+
+
+
+
+# let's set up basic logging.     
+logging.basicConfig(level=logging.INFO, format='%(asctime)-15s %(name)s| %(message)s')
+
 
 listener = CrossOverMonitor()
 aqsPrice = AqSocket(listener)

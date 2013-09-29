@@ -16,29 +16,29 @@
 import os
 import sys
 
-path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-if not path in sys.path:
-    sys.path.insert(1, path)
-del path
-
 from aq.stream.messages_pb2 import *
 from aq.stream.aq_socket import *
 from aq.stream.message_listener import *
 from aq.domainmodel.definitions import *
 
 class MyListener(MessageListener):
-  def loggedIn(self):
-    print "Logged in!"
-  def connected(self):
-    aqsPrice.login('demo', 'demo', "PRICE")
-    aqsPrice.subscribe(Symbols.GBPNOK, TimeFrames.MINUTES_1)
-    aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.MINUTES_1)
-    aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.RAW)
-    aqsPrice.subscribe(Symbols.SMICHF, TimeFrames.MINUTES_1)
-    aqsPrice.subscribe(Symbols.DAXEUR, TimeFrames.RAW)
-
+    def loggedIn(self):
+        print "Logged in!"
     
+    def connected(self):
+        aqsPrice.login('demo', 'demo', "PRICE")
+    
+    def loggedIn(self):
+        aqsPrice.subscribe(Symbols.GBPNOK, TimeFrames.MINUTES_1)
+        aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.MINUTES_1)
+        aqsPrice.subscribe(Symbols.EURUSD, TimeFrames.RAW)
+        aqsPrice.subscribe(Symbols.SMICHF, TimeFrames.MINUTES_1)
+        aqsPrice.subscribe(Symbols.DAXEUR, TimeFrames.RAW)
+        
 
+
+# let's set up basic logging.     
+logging.basicConfig(level=logging.INFO, format='%(asctime)-15s %(name)s| %(message)s')
 
 aqsPrice = AqSocket(MyListener())
 aqsPrice.host = '78.47.96.150'
