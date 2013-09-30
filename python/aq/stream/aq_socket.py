@@ -30,7 +30,7 @@ class AqSocket (threading.Thread):
 
     sock = None 
     messageListener = None
-    host = '78.47.96.150' # by default we connect to the demo server. 
+    host = '78.47.96.150'  # by default we connect to the demo server. 
     port = 59999   
     orderCounter = 0
     logger = None
@@ -50,7 +50,6 @@ class AqSocket (threading.Thread):
         mlistener.aqSocket = self
         self.kill_received = False
         #  let's register the signals. 
-        signal.signal(signal.SIGBREAK, self.sigHandler)
         signal.signal(signal.SIGINT, self.sigHandler)
         signal.signal(signal.SIGTERM, self.sigHandler)            
         
@@ -62,7 +61,7 @@ class AqSocket (threading.Thread):
         print 'SIGHANDLER', a, b
         # for now, we just quit. 
         self.quitSocket()
-        sys.exit()   # feedback requested.      
+        sys.exit()  # feedback requested.      
         
     def quitSocket(self):
         self.logger.info("Socket quit called.");
@@ -90,7 +89,7 @@ class AqSocket (threading.Thread):
                     data = self.sock.recv(1)
                     self.logger.debug("Received a byte.")                    
                     if len(data) == 0:
-                        if self.messageListener!=None:
+                        if self.messageListener != None:
                             self.messageListener.disconnected()
                             self.sock = None
                         break
@@ -111,7 +110,7 @@ class AqSocket (threading.Thread):
                     self.sock.close()
                 self.sock = None
             # let's check if we should reconnect
-            if self.autoReconnectTime>0 and not self.kill_received:
+            if self.autoReconnectTime > 0 and not self.kill_received:
                 time.sleep(self.autoReconnectTime)
             else: 
                 break

@@ -55,7 +55,6 @@ class XmppBot(sleekxmpp.ClientXMPP):
         self.add_event_handler("session_start", self.start)
         self.add_event_handler("message", self.message)
 
-        signal.signal(signal.SIGBREAK, self.sigHandler)
         signal.signal(signal.SIGINT, self.sigHandler)
         signal.signal(signal.SIGTERM, self.sigHandler)     
           
