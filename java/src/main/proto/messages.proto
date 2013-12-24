@@ -1,0 +1,391 @@
+package com.activequant.messages;
+
+option java_package = "com.activequant.messages";
+option java_outer_classname = "AQMessages";
+
+message BaseMessage {
+        extensions 100 to max;
+ 		enum CommandType {
+                VERSION = 1;
+                LOGIN   = 2;                
+                SERVER_TIME = 3;
+                LOGIN_RESPONSE = 4;  
+                MDS = 5; 
+                ACCT_DATA = 6;
+                POSITION_REPORT=7;  
+                EXECUTION_REPORT = 8;                
+                ORD_CNCL_REQ = 9;                 
+                ORD_CNCL_REJ = 10; 
+                ORD_CNCL_REPL_REQ = 11; 
+                NEW_ORDER = 12; 
+                ORD_SUBMITTED = 13;
+                ORD_ACCPTD = 14;  
+                ORD_CANCELLED = 15;
+                ORD_UPDATED = 16;  
+                SECURITY_STATUS = 17; 
+                ORD_REJ = 18;
+                
+                ORD_UPDATE_SUBMITTED = 19; 
+                ORD_CANCEL_SUBMITTED = 20; 
+                ORD_UPD_REJECTED = 21; 
+                EXECUTION_REPORT2 = 22;                
+                
+                CUST_CMD = 23; 
+                INFO_EVENT = 24; 
+                
+                OHLC = 25; 
+                TICK = 26; 
+                
+                VALUESET = 27;
+
+				MD_SUBSCRIBE = 28;
+				MD_SUBSCRIBE_RESPONSE = 29;
+				MD_UNSUBSCRIBE = 30;
+				MD_UNSUBSCRIBE_RESPONSE = 31; 
+                
+				HIST_REQUEST = 32; 
+				HIST_OHLCRESPONSE = 33; 
+        }
+        required CommandType type = 1;
+
+		}
+
+message Login {
+    extend BaseMessage {
+    	required Login cmd = 100;
+    }
+	required string userId = 1; 
+	required string password = 2;
+	required string sessionType = 3;  
+}
+
+message ServerTime {
+    extend BaseMessage {
+    	required ServerTime cmd = 101;
+    }
+	required int64 timestamp = 1; 	 
+}
+
+message LoginResponse {
+    extend BaseMessage {
+    	required LoginResponse cmd = 102;
+    }
+	required string status = 1; 	 
+}
+
+message MarketDataSnapshot {
+   extend BaseMessage {
+    	required MarketDataSnapshot cmd = 103;
+    }
+	required int64 timestamp = 1;
+	repeated double bidPx = 2;
+	repeated double askPx = 3;
+	repeated double bidQ = 4;
+	repeated double askQ = 5;   
+	required string mdiId = 6;
+	optional bool resend = 7;  
+}
+
+message AccountDataMessage {
+    extend BaseMessage {
+    	required AccountDataMessage cmd = 104;
+    }
+	required string type = 1;
+	required string value = 2;  	 
+}
+
+message PositionReport {
+    extend BaseMessage {
+    	required PositionReport cmd = 105;
+    }
+	required string openDate = 1;  
+	required double entryPrice = 2; 
+	required double quantity = 3; 
+	required string tradInstId = 4; 	  	 
+}
+
+message ExecutionReport {
+    extend BaseMessage {
+    	required ExecutionReport cmd = 106;
+    }
+	required string clOrdId = 1;  
+	required string execId = 2; 
+	required int32 side = 3;
+	required string currency = 4;	
+	required double orderQty = 5;
+	required double price = 6;
+	required string tradInstId = 7;
+	required string transactTime = 8;
+	required string orderId = 9;
+	required int32 execType = 10;
+	required int32 ordStatus = 11;
+	required double cumQty = 12;
+	required double leavesQty = 13;
+	required double avgPx = 14;
+	required string ordType = 16;
+	optional string text = 17;
+	optional string comment = 19;  
+	optional string massStatusReqId = 20;	
+}
+
+message OrderCancelRequest {
+    extend BaseMessage {
+    	required OrderCancelRequest cmd = 107;
+    }
+	required string orgCldOrdId = 1;  
+	required string clOrdId = 2; 
+	required string tradInstId = 3; 
+	required int32 side = 4; 
+	required double orderQty = 6;
+	optional string comment = 19;
+}
+
+message OrderCancelReject {
+    extend BaseMessage {
+    	required OrderCancelReject cmd = 108;
+    }
+	required string tradInstId = 1;  
+	required string clOrdId = 2; 
+	required string orgClOrdId = 3; 
+	required string ordStatus = 4;  
+	required string CxlRejResponseTo = 5;
+	optional string clxRejReason = 6;
+	optional string text = 7;
+	optional string comment = 19;
+}
+
+
+message OrderCancelReplaceRequest {
+    extend BaseMessage {
+    	required OrderCancelReplaceRequest cmd = 109;
+    }
+	required string tradInstId = 1;  
+	required string clOrdId = 2; 
+	required string orgClOrdId = 3;
+	required int32 side = 4; 
+	required string transactTime = 5; 
+	required double orderQty = 6; 	
+	required int32 ordType = 7;
+	required double price = 8;
+	required int32 timeInForce = 9;
+	optional string comment = 19;
+	
+}
+
+message NewOrder {
+    extend BaseMessage {
+    	required NewOrder cmd = 110;
+    }
+	required string tradInstId = 1;  
+	required string clOrdId = 2; 
+	optional string orgClOrdId = 3;
+	required int32 side = 4; 
+	optional string transactTime = 5; 
+	required double orderQty = 6; 	
+	required int32 ordType = 7;
+	optional double price = 8;
+	optional int32 timeInForce = 9;
+	optional string comment = 19;
+	required int32 resend = 20; 
+	
+}
+
+message OrderSubmitted {
+	extend BaseMessage {
+    	required OrderSubmitted cmd = 111;
+    }
+    required string clOrdId = 2;
+}
+
+message OrderAccepted {
+	extend BaseMessage {
+    	required OrderAccepted cmd = 112;
+    }
+    required string clOrdId = 2;
+}
+
+message OrderCancelled {
+    extend BaseMessage {
+    	required OrderCancelled cmd = 113;
+    }
+	required string clOrdId = 2; 
+}
+
+
+message OrderUpdated {
+    extend BaseMessage {
+    	required OrderUpdated cmd = 114;
+    }
+	required string clOrdId = 2; 
+}
+
+message SecurityStatus {
+   extend BaseMessage {
+    	required SecurityStatus cmd = 115;
+    }
+	required string tdiId = 2;
+	required string status = 3;  
+}
+
+message OrderRejected {
+    extend BaseMessage {
+    	required OrderRejected cmd = 116;
+    }
+	required string clOrdId = 2;
+	required string reason = 3;  
+}
+
+message OrderUpdateSubmitted {
+	extend BaseMessage {
+    	required OrderUpdateSubmitted cmd = 117;
+    }
+    required string clOrdId = 2;
+}
+
+message OrderCancelSubmitted {
+	extend BaseMessage {
+    	required OrderCancelSubmitted cmd = 118;
+    }
+    required string clOrdId = 2;
+}
+
+message OrderUpdateRejected {
+	extend BaseMessage {
+    	required OrderUpdateRejected cmd = 119;
+    }
+    required string clOrdId = 2;
+    required string reason = 3;
+}
+
+message ExecutionReport2 {
+    extend BaseMessage {
+    	required ExecutionReport2 cmd = 120;
+    }
+	required string clOrdId = 1;  
+	required string execId = 2; 
+	required string side = 3;
+	required double price = 6;
+	required string tdiId = 7;
+	required int64 transactTime = 8;
+	required double qty = 13;
+	required int32 resend = 14;
+	required double quantityLeft = 15;
+}
+
+
+message CustomCommand {
+    extend BaseMessage {
+    	required CustomCommand cmd = 121;
+    }
+	required string command = 1;  
+}
+
+
+message InfoEvent {
+    extend BaseMessage {
+    	required InfoEvent cmd = 122;
+    }
+	required string message = 1;
+	required int64 timestamp = 2;
+}
+
+message OHLC {
+	extend BaseMessage {
+    	required OHLC cmd = 123;
+    }
+	required int64 timestamp = 1;
+	required int32 timeframe = 8; 
+	required string mdiId = 2; 
+	required double open = 3;
+	required double high = 4; 
+	required double low = 5; 
+	required double close = 6;
+	optional double volume = 7; 
+}
+		
+message Tick {
+	extend BaseMessage {
+    	required Tick cmd = 124;
+    }
+	required int64 timestamp = 1;
+	required string mdiId = 2; 
+	required double price = 3;
+	required double quantity = 4; 
+	required int32 tickDirection = 5; 
+}
+		
+
+message ValueSet {
+	extend BaseMessage {
+    	required ValueSet cmd = 125;
+    }
+	required int64 timestamp = 1;
+	required string type = 2;
+	required string id = 3; 
+	required string field = 4; 
+	required string value = 5;  	
+}
+			
+			
+
+message MDSubscribe {
+	extend BaseMessage {
+    	required MDSubscribe cmd = 126;
+    }
+	required string mdiId = 2; 
+	required string timeframe = 3;
+}
+
+
+message MDUnsubscribe {
+	extend BaseMessage {
+    	required MDUnsubscribe cmd = 127;
+    }
+	required string mdiId = 2; 
+	required string timeframe = 3;
+}
+
+
+message MDSubscribeResponse {
+	extend BaseMessage {
+    	required MDSubscribeResponse cmd = 128;
+    }
+	required string status = 2;
+	required int32 flag = 3; 
+}
+
+
+message MDUnsubscribeResponse {
+	extend BaseMessage {
+    	required MDSubscribeResponse cmd = 129;
+    }
+	required string status = 2;
+	required int32 flag = 3; 
+}
+
+message HistRequest {
+	extend BaseMessage {
+    	required HistRequest cmd = 130;
+    }
+	required string mdiId = 2;
+	required int32 startDate8	= 3;
+	required int32 endDate8 = 4; 
+	required string timeframe = 5; 
+}
+
+message HistOhlcResponse {
+	extend BaseMessage {
+    	required HistOhlcResponse cmd = 131;
+    }
+	required string mdiId = 2;
+	repeated int64 timestamp = 3;
+	repeated double open = 4;
+	repeated double high = 5; 
+	repeated double low = 6; 
+	repeated double close = 7; 
+	repeated double volume = 8; 
+	required int32 final = 9; 
+	optional int32 errorCode = 10; 
+	optional string errorMessage = 11; 
+}
+
