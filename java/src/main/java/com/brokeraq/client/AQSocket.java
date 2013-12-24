@@ -13,6 +13,7 @@ import com.activequant.interfaces.utils.IEventListener;
 import com.activequant.messages.AQMessages;
 import com.activequant.messages.AQMessages.BaseMessage;
 import com.brokeraq.client.exceptions.ConnectionAttemptInProgress;
+import java.util.logging.Level;
 
 /**
  * Package visibility intended, do not use directly.
@@ -90,7 +91,7 @@ class AQSocket {
     }
 
     private void send(BaseMessage bm) {
-        log.info("Sending: " + bm);
+        log.log(Level.INFO, "Sending: {0}", bm);
         channel.write(bm);
     }
     private IEventListener<AQMessages.BaseMessage> internalListener = new IEventListener<AQMessages.BaseMessage>() {

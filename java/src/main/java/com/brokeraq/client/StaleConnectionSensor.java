@@ -8,7 +8,7 @@ import org.jboss.netty.handler.timeout.IdleStateAwareChannelHandler;
 import org.jboss.netty.handler.timeout.IdleStateEvent;
 
 /**
- * This sensor checks whether the connection is stale or not.
+ * This sensor checks whether a netty connection is stale or not.
  *
  * @author ustaudinger
  */

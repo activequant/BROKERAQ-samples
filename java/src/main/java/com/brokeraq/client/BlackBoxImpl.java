@@ -34,14 +34,11 @@ import com.activequant.messages.AQMessages.OHLC;
 import com.activequant.messages.AQMessages.PositionReport;
 import com.activequant.messages.AQMessages.ServerTime;
 import com.activequant.messages.AQMessages.Tick;
-import com.activequant.messages.MessageFactory2;
 import com.activequant.utils.UniqueTimeStampGenerator;
 import com.activequant.utils.events.Event;
 import com.brokeraq.client.exceptions.ConnectionAttemptInProgress;
 import com.brokeraq.client.exceptions.NoUsernamePassword;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -82,7 +79,6 @@ public class BlackBoxImpl implements IBlackBox {
     private String password;
     private String userName;
     private MessageFactory mf = new MessageFactory();
-    private MessageFactory2 mf2 = new MessageFactory2();
     private static BlackBoxImpl instance = null;
     private static Object lock = new Object();
     private static final Logger log = Logger.getLogger(BlackBoxImpl.class
@@ -556,7 +552,7 @@ public class BlackBoxImpl implements IBlackBox {
         if (!subscribed(s)) {
             log.log(Level.INFO, "Subscribing to {0} ", instrument);
             subscriptions.add(s);
-            send(mf2.subscribe(formattedInst, timeFrame, 1));
+            send(mf.subscribe(formattedInst, timeFrame, 1));
         }
     }
 
@@ -574,7 +570,7 @@ public class BlackBoxImpl implements IBlackBox {
             subscriptions.remove(idx);
         }
         // let's send out the unsubscribe message ... 
-        send(mf2.unsubscribe(instrument, timeFrame));
+        send(mf.unsubscribe(instrument, timeFrame));
     }
 
     /**
@@ -583,7 +579,7 @@ public class BlackBoxImpl implements IBlackBox {
     private void resubscribeMarketData() {
         log.info("Resubscribing market data.");
         for (Subscription s : subscriptions) {
-            send(mf2.subscribe(s.instrument, s.tf, 1));
+            send(mf.subscribe(s.instrument, s.tf, 1));
         }
     }
 
@@ -623,7 +619,7 @@ public class BlackBoxImpl implements IBlackBox {
         }
         orderDirectory.addOrder(marketOrder);
         // 
-        BaseMessage bm = mf2.orderMktOrder(orderId, instrument,
+        BaseMessage bm = mf.orderMktOrder(orderId, instrument,
                 Math.abs(quantity), quantity > 0 ? OrderSide.BUY : OrderSide.SELL, 0);
         send(bm);
         // 
@@ -657,7 +653,7 @@ public class BlackBoxImpl implements IBlackBox {
         }
         orderDirectory.addOrder(limitOrder);
 
-        BaseMessage bm = mf2.orderLimitOrder(orderId, instrument,
+        BaseMessage bm = mf.orderLimitOrder(orderId, instrument,
                 Math.abs(quantity), price, quantity > 0 ? OrderSide.BUY : OrderSide.SELL, 0);
         send(bm);
 
@@ -700,7 +696,7 @@ public class BlackBoxImpl implements IBlackBox {
         orderDirectory.addOrder(stopOrder);
 
         // 
-        BaseMessage bm = mf2.orderStopOrder(orderId, instrument,
+        BaseMessage bm = mf.orderStopOrder(orderId, instrument,
                 Math.abs(quantity), price, quantity > 0 ? OrderSide.BUY : OrderSide.SELL, 0);
         send(bm);
         sendOrderSubmittedEvent(instrument, stopOrder);
@@ -724,7 +720,7 @@ public class BlackBoxImpl implements IBlackBox {
     public void cancelOrder(String orderId) {
         String cancelOrderId = "ID" + utsg.now().getNanoseconds();
         SingleLegOrder slo = (SingleLegOrder) orderDirectory.getOrder(orderId);
-        BaseMessage ocr = mf2.OrderCancelRequest(cancelOrderId, orderId, slo.getTradInstId(), slo.getOrderSide(), Math.abs(slo.getQuantity()));
+        BaseMessage ocr = mf.OrderCancelRequest(cancelOrderId, orderId, slo.getTradInstId(), slo.getOrderSide(), Math.abs(slo.getQuantity()));
         send(ocr);
         // let's also send out the order cancellation submitted event. 
         OrderCancelSubmittedEvent ocse = new OrderCancelSubmittedEvent();

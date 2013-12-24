@@ -30,12 +30,14 @@ import com.activequant.messages.AQMessages;
 import com.activequant.messages.AQMessages.LoginResponse;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
 /**
- * example for a client side. to be placed somewhere else.
+ * The AQClientHandler is used in the Client Pipeline of Netty for processing
+ * incoming messages. Do not use directly, but stick to the BlackBoxImpl.
+ *
+ * @author ustaudinger
  */
 class AQClientHandler extends SimpleChannelUpstreamHandler {
 
@@ -331,9 +333,8 @@ class AQClientHandler extends SimpleChannelUpstreamHandler {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
-        logger.warning("Exception caught " + e.getCause());
+        logger.log(Level.WARNING, "Exception caught {0}", e.getCause());
         logger.throwing(this.getClass().getName(), "exception Caught", e.getCause());
-        e.getCause().printStackTrace();
         e.getChannel().close();
     }
 

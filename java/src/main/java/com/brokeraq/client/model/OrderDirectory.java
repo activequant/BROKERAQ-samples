@@ -18,7 +18,7 @@ import java.util.Map;
 public class OrderDirectory {
 
     private Map<String, Order> orderMap = new HashMap<String, Order>();
-    private static Object lock = new Object();
+    private static final Object lock = new Object();
     private static OrderDirectory instance;
 
     private OrderDirectory() {

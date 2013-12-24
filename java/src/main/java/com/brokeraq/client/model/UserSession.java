@@ -12,7 +12,7 @@ public final class UserSession {
      */
     private String username;
     /**
-     * The password in unencrypted form.
+     * The password in nonencrypted form.
      */
     private String password;
     /**
